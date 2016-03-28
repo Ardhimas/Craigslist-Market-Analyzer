@@ -6,10 +6,10 @@ var Schema = mongoose.Schema;
 // define our car model
 // module.exports allows us to pass this to other files when it is called
 var CarSchema = new Schema({
-    name: String,
+    make: String,
+    model: String,
     year: Number,
-    mileage: Number,
-    listDate: Number
+    mileage: Number
 });
 
 module.exports = mongoose.model('Car', CarSchema);

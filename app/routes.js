@@ -7,22 +7,6 @@ var express = require('express');
     module.exports = function(app) {
 
         // server routes ===========================================================
-        // handle things like api calls
-        // authentication routes
-
-        // sample api route
-        // app.get('/api/cars', function(req, res) {
-        //     // use mongoose to get all cars in the database
-        //     car.find(function(err, cars) {
-
-        //         // if there is an error retrieving, send the error. 
-        //                         // nothing after res.send(err) will execute
-        //         if (err)
-        //             res.send(err);
-
-        //         res.json(cars); // return all cars in JSON format
-        //     });
-        // });
 
         // route to handle creating goes here (app.post)
         // route to handle delete goes here (app.delete)
@@ -46,14 +30,17 @@ var express = require('express');
             .post(function(req, res) {
                 
                 var car = new Car();      // create a new instance of the Car model
-                car.name = req.body.name;  // set the cars name (comes from the request)
+                car.make = req.body.make;  // set the cars name (comes from the request)
+                car.model = req.body.model;
+                car.year = req.body.year;
+                car.mileage = req.body.mileage;
         
                 // save the car and check for errors
                 car.save(function(err) {
                     if (err)
                         res.send(err);
         
-                    res.json({ message: 'Car created!' });
+                    res.json({ message: 'Car made!' });
                 });
             })
         
@@ -68,6 +55,16 @@ var express = require('express');
             });
         
         // more routes for our API will happen here
+        
+        router.route('/cars/:car_id')
+            // get the bear with that id (accessed at GET http://localhost:8080/api/bears/:bear_id)
+            .get(function(req, res) {
+                Car.findById(req.params.car_id, function(err, car) {
+                    if (err)
+                        res.send(err);
+                    res.json(car);
+                });
+            });
         
         // REGISTER OUR ROUTES -------------------------------
         // all of our routes will be prefixed with /api
