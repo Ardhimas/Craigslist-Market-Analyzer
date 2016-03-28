@@ -1,13 +1,24 @@
 <!-- public/views/car.html -->
 
 <div class="jumbotron text-center">
-    <h1>A car is here</h1>
+    <h1>Car Listing</h1>
 
     <p>{{ tagline }}</p>
-    <p>{{ carData }}</p>
-    <ul>
-  <li ng-repeat="x in carData">
-    {{ x.make + ', ' + x.model }}
-  </li>
+    <!--<p>{{ carData }}</p>-->
+  <table style="width:100%">
+      <tr>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Year</th>
+        <th>Price</th>
+      </tr>
+      <tr ng-repeat="x in carData">
+        <td>{{x.make}}</td>
+        <td>{{x.model}}</td>
+        <td>{{x.year}}</td>
+        <td>{{'$'+x.price}}</td>
+        <!--{{ x.make + ' ' + x.model + ' ' x.year }}-->
+      </tr>
+  </table>
 </ul>
 </div>

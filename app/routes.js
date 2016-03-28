@@ -33,7 +33,7 @@ var express = require('express');
                 car.make = req.body.make;  // set the cars name (comes from the request)
                 car.model = req.body.model;
                 car.year = req.body.year;
-                car.mileage = req.body.mileage;
+                car.price = req.body.price;
         
                 // save the car and check for errors
                 car.save(function(err) {
@@ -79,7 +79,7 @@ var express = require('express');
                     car.make = req.body.make;  // set the cars name (comes from the request)
                     car.model = req.body.model;
                     car.year = req.body.year;
-                    car.mileage = req.body.mileage;
+                    car.price = req.body.price;
         
                     // save the car
                     car.save(function(err) {
