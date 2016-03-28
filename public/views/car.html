@@ -4,4 +4,10 @@
     <h1>A car is here</h1>
 
     <p>{{ tagline }}</p>
+    <p>{{ carData }}</p>
+    <ul>
+  <li ng-repeat="x in carData">
+    {{ x.make + ', ' + x.model }}
+  </li>
+</ul>
 </div>
