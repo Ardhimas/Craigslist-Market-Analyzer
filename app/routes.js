@@ -57,14 +57,53 @@ var express = require('express');
         // more routes for our API will happen here
         
         router.route('/cars/:car_id')
-            // get the bear with that id (accessed at GET http://localhost:8080/api/bears/:bear_id)
+            // get the car with that id (accessed at GET http://localhost:8080/api/cars/:car_id)
             .get(function(req, res) {
                 Car.findById(req.params.car_id, function(err, car) {
                     if (err)
                         res.send(err);
                     res.json(car);
                 });
+            })
+        
+            // update the car with this id (accessed at PUT http://localhost:8080/api/cars/:car_id)
+            .put(function(req, res) {
+        
+                // use our car model to find the car we want
+                Car.findById(req.params.car_id, function(err, car) {
+        
+                    if (err)
+                        res.send(err);
+        
+                    //Update car info
+                    car.make = req.body.make;  // set the cars name (comes from the request)
+                    car.model = req.body.model;
+                    car.year = req.body.year;
+                    car.mileage = req.body.mileage;
+        
+                    // save the car
+                    car.save(function(err) {
+                        if (err)
+                            res.send(err);
+        
+                        res.json({ message: 'Car updated!' });
+                    });
+        
+                });
+            })
+            
+            // delete the car with this id (accessed at DELETE http://localhost:8080/api/cars/:car_id)
+            .delete(function(req, res) {
+                Car.remove({
+                    _id: req.params.car_id
+                }, function(err, car) {
+                    if (err)
+                        res.send(err);
+        
+                    res.json({ message: 'Successfully deleted' });
+                });
             });
+
         
         // REGISTER OUR ROUTES -------------------------------
         // all of our routes will be prefixed with /api
