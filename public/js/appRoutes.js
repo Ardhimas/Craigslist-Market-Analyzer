@@ -13,6 +13,12 @@
         .when('/cars', {
             templateUrl: 'views/car.html',
             controller: 'CarController'
+        })
+        
+        // parser control page
+        .when('/parser', {
+            templateUrl: 'views/parser.html',
+            controller: 'ParserController'
         });
 
     $locationProvider.html5Mode(true);
