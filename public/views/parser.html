@@ -4,6 +4,29 @@
     <h1>Parser</h1>
 
     <p>{{ tagline }}</p>
+    <!--<span>Selected: {make: {{selectedItem.make}}, id: {{selectedItem.id}} }</span>-->
+    <!--<span>Selected Car: {{car.selected}}</span>-->
+    <!--<ui-select ng-model="car.selected">-->
+    <!--  <ui-select-match placeholder="Select car in list or search for make/model">-->
+    <!--      {{$select.selected.make}}-->
+          <!--<span ng-bind="$select.selected.make"></span>-->
+          <!--<span ng-bind="$select.selected.model"></span>-->
+    <!--  </ui-select-match>-->
+    <!--  <ui-select-choices repeat="car in carList | filter: $select.search)">-->
+    <!--      <span ng-bind-html="car.make | highlight: $select.search"></span>-->
+    <!--      <small ng-bind-html="car.model | highlight: $select.search"></small>-->
+          <!--<span ng-bind="car.model | highlight: $select.search"></span>-->
+    <!--  </ui-select-choices>-->
+    <!--</ui-select>-->
     <!--<p>{{ carData }}</p>-->
+    
+    <p>Selected: {{car.selected}}</p>
+    <ui-select ng-model="car.selected" theme="bootstrap" ng-disabled="disabled" style="width: 300px;">
+      <ui-select-match placeholder="Select or search for a car in the list...">{{$select.selected.make + ' ' + $select.selected.model}}</ui-select-match>
+      <ui-select-choices repeat="car in carList | filter: $select.search">
+        <span ng-bind-html="car.make | highlight: $select.search"></span>
+        <small ng-bind-html="car.model | highlight: $select.search"></small>
+      </ui-select-choices>
+    </ui-select>
 </ul>
 </div>

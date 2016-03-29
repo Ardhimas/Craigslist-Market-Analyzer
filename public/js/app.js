@@ -1,2 +1,2 @@
 // public/js/app.js
-angular.module('sampleApp', ['ngRoute', 'appRoutes', 'MainCtrl', 'CarCtrl', 'ParserCtrl', 'CarService']);
+angular.module('sampleApp', ['ngRoute', 'ui.select', 'appRoutes', 'MainCtrl', 'CarCtrl', 'ParserCtrl', 'CarService']);
