@@ -1,8 +1,10 @@
 // public/js/controllers/CarCtrl.js
 angular.module('ParserCtrl', []).controller('ParserController', function($scope, Parser) {
 
-    $scope.tagline = Parser.get('Honda', 'Civic');
-    
+    function setTagline(tagline){
+        $scope.tagline = tagline;
+    }
+    Parser.get('Honda','Civic',setTagline);
     $scope.car = {};
     $scope.carList = [
         {make: 'Honda', model: 'Civic'},
