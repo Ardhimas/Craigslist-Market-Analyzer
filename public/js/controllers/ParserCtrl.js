@@ -1,7 +1,7 @@
 // public/js/controllers/CarCtrl.js
-angular.module('ParserCtrl', []).controller('ParserController', function($scope) {
+angular.module('ParserCtrl', []).controller('ParserController', function($scope, Parser) {
 
-    $scope.tagline = 'Parser control page';
+    $scope.tagline = Parser.get('Honda', 'Civic');
     
     $scope.car = {};
     $scope.carList = [
