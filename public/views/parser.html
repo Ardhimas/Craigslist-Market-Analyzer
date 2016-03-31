@@ -1,6 +1,6 @@
 <!-- public/views/parser.html -->
 
-<div class="jumbotron text-center">
+<div class="jumbotron text-center" data-ng-controller="ParserController">
     <h1>Parser</h1>
 
     <p>{{ tagline }}</p>
@@ -29,6 +29,18 @@
       </ui-select-choices>
     </ui-select>
     <br>
-    <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="parseCar(car.make,car.model)">Parse!</button>
-</ul>
+    <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="parseCar(car.selected.make,car.selected.model)">Parse!</button>
+    <table style="width:100%">
+      <tr>
+        <th>List Name</th>
+        <th>List Price</th>
+      </tr>
+      <tr ng-repeat="x in this.listData">
+        <td>{{x.title}}</td>
+        <!--<td>{{x.model}}</td>-->
+        <!--<td>{{x.year}}</td>-->
+        <td>{{x.price}}</td>
+        <!--{{ x.make + ' ' + x.model + ' ' x.year }}-->
+      </tr>
+    </table>
 </div>

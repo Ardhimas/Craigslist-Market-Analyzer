@@ -1,11 +1,16 @@
 // public/js/controllers/CarCtrl.js
 angular.module('ParserCtrl', []).controller('ParserController', function($scope, Parser) {
-
-    function setTagline(tagline){
-        $scope.tagline = tagline;
+    $scope.tagline = 'Welcome to the parser control page';
+    // $scope.listData = ["hello","lonely"];
+    function showList(listings){
+        $scope.$apply(function(){
+            $scope.listData = listings;
+            // $scope.tagline = listings;
+            // alert($scope.listData);
+        });
     }
     $scope.parseCar = function(make,model){
-        Parser.get(make,model,setTagline);
+        Parser.get(make,model,showList);
     };
     $scope.car = {};
     $scope.carList = [

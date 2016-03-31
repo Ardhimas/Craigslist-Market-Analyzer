@@ -14,11 +14,20 @@ angular.module('ParserService', []).factory('Parser', [ function() {
                 //options.url = "http://cors.corsproxy.io/url=" + options.url;
               }
             });
-            angular.element.get('http://austin.craigslist.org/search/cto?auto_make_model=toyota+corolla', function(data) {
+            angular.element.get('http://austin.craigslist.org/search/cto?auto_make_model=' + make + '+' + model, function(data) {
                 // dfd.resolve();
                 // value = 'test';
-                alert('worked');
-                callback(angular.element(data).find('#titletextonly').text());
+                // alert(make + '+' + model);
+                // #searchform > div.content > p:nth-child(2) > span > span.l2 > span.price
+                //*[@id="searchform"]/div[4]/p[1]/span/span[3]/span[1]
+                //*[@id="titletextonly"]
+                var listings = [];
+                angular.element(data).find('#titletextonly').each(function(){
+                    var tempTitle = angular.element(this).text();
+                    var tempPrice = angular.element(this).parent().siblings('span.price').text();
+                    listings.push({title: tempTitle, price: tempPrice});
+                })
+                callback(listings);
             });
             
         }
