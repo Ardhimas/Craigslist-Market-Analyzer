@@ -32,14 +32,15 @@
     <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="parseCar(car.selected.make,car.selected.model)">Parse!</button>
     <table style="width:100%">
       <tr>
-        <th>List Name</th>
-        <th>List Price</th>
+        <th>List Title</th>
+        <th>Year</th>
+        <th>Price</th>
       </tr>
       <tr ng-repeat="x in this.listData">
         <td>{{x.title}}</td>
         <!--<td>{{x.model}}</td>-->
-        <!--<td>{{x.year}}</td>-->
-        <td>{{x.price}}</td>
+        <td>{{x.year}}</td>
+        <td>{{'$' + x.price}}</td>
         <!--{{ x.make + ' ' + x.model + ' ' x.year }}-->
       </tr>
     </table>

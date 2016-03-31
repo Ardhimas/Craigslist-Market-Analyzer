@@ -22,11 +22,24 @@ angular.module('ParserService', []).factory('Parser', [ function() {
                 //*[@id="searchform"]/div[4]/p[1]/span/span[3]/span[1]
                 //*[@id="titletextonly"]
                 var listings = [];
-                angular.element(data).find('#titletextonly').each(function(){
-                    var tempTitle = angular.element(this).text();
-                    var tempPrice = angular.element(this).parent().siblings('span.price').text();
-                    listings.push({title: tempTitle, price: tempPrice});
-                })
+                angular.element(data).find('span.txt').each(function(){
+                    var tempTitle = angular.element(this).find('#titletextonly').text();
+                    var tempPrice = parseInt(angular.element(this).find('span.price').text().slice(1));
+                    var tempYear = tempTitle.match(/(^|\D)(\d{4}|\d{2})(\D|$)/);
+                    if (tempYear != null) {
+                        tempYear = parseInt(tempYear[2]);
+                    }
+                    if (tempYear < 100) {
+                        if(tempYear > 50){
+                            tempYear += 1900;
+                        }else {
+                            tempYear += 2000;
+                        }
+                    }
+                    if (tempPrice >= 1000 && tempYear > 0){
+                        listings.push({title: tempTitle, price: tempPrice, year: tempYear});
+                    }
+                });
                 callback(listings);
             });
             
