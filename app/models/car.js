@@ -9,7 +9,8 @@ var CarSchema = new Schema({
     make: String,
     model: String,
     year: Number,
-    price: Number
+    price: Number,
+    carID: Number
 });
 
 module.exports = mongoose.model('Car', CarSchema);

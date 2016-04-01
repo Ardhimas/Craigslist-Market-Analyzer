@@ -4,7 +4,7 @@ angular.module('CarService', []).factory('Car', ['$http', function($http) {
     return {
         // call to get all cars
         getAll : function() {
-            console.log($http.get('/api/cars'));
+            // console.log($http.get('/api/cars'));
             return $http.get('/api/cars');
         },
 
@@ -17,6 +17,8 @@ angular.module('CarService', []).factory('Car', ['$http', function($http) {
                 // these will work when more API routes are defined on the Node side of things
         // call to POST and create a new car
         create : function(carData) {
+            var code = 'make='+carData.make+'&model='+carData.model+'&year='+
+                carData.year+'&price='+carData.price+'&id='+carData.carid;
             return $http.post('/api/cars', carData);
         },
 

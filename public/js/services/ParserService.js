@@ -21,7 +21,7 @@ angular.module('ParserService', []).factory('Parser', [ function() {
                 angular.element(data).find('span.txt').each(function(){
                     var tempTitle = angular.element(this).find('#titletextonly').text();
                     var tempPrice = parseInt(angular.element(this).find('span.price').text().slice(1));
-                    var tempUrl = angular.element(this).find('a').attr('href');
+                    var tempId = parseInt(angular.element(this).find('a').attr('href').slice(5,15));
                     var tempYear = tempTitle.match(/(^|\D)(\d{4}|\d{2})(\D|$)/);
                     if (tempYear != null) {
                         tempYear = parseInt(tempYear[2]);
@@ -34,7 +34,7 @@ angular.module('ParserService', []).factory('Parser', [ function() {
                         }
                     }
                     if (tempPrice >= 1000 && tempYear > 0){
-                        listings.push({title: tempTitle, price: tempPrice, year: tempYear, url: tempUrl});
+                        listings.push({title: tempTitle, price: tempPrice, year: tempYear, carID: tempId});
                     }
                 });
                 callback(listings);

@@ -34,6 +34,7 @@ var express = require('express');
                 car.model = req.body.model;
                 car.year = req.body.year;
                 car.price = req.body.price;
+                car.carID = req.body.carID;
         
                 // save the car and check for errors
                 car.save(function(err) {
@@ -59,7 +60,12 @@ var express = require('express');
         router.route('/cars/:car_id')
             // get the car with that id (accessed at GET http://localhost:8080/api/cars/:car_id)
             .get(function(req, res) {
-                Car.findById(req.params.car_id, function(err, car) {
+                // Car.findById(req.params.car_id, function(err, car) {
+                //     if (err)
+                //         res.send(err);
+                //     res.json(car);
+                // });
+                Car.findOne({ carID: req.params.car_id},function(err, car) {
                     if (err)
                         res.send(err);
                     res.json(car);
@@ -80,6 +86,7 @@ var express = require('express');
                     car.model = req.body.model;
                     car.year = req.body.year;
                     car.price = req.body.price;
+                    car.carID = req.body.carID;
         
                     // save the car
                     car.save(function(err) {
