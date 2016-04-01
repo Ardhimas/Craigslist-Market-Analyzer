@@ -35,12 +35,14 @@
         <th>List Title</th>
         <th>Year</th>
         <th>Price</th>
+        <th>Url</th>
       </tr>
       <tr ng-repeat="x in this.listData">
         <td>{{x.title}}</td>
         <!--<td>{{x.model}}</td>-->
         <td>{{x.year}}</td>
         <td>{{'$' + x.price}}</td>
+        <td>{{x.url}}</td>
         <!--{{ x.make + ' ' + x.model + ' ' x.year }}-->
       </tr>
     </table>

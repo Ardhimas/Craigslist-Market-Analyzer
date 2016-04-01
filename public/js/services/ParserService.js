@@ -15,29 +15,26 @@ angular.module('ParserService', []).factory('Parser', [ function() {
               }
             });
             angular.element.get('http://austin.craigslist.org/search/cto?auto_make_model=' + make + '+' + model, function(data) {
-                // dfd.resolve();
-                // value = 'test';
+            //angular.element.get('https://craigslist-market-analyzer-ardhimas.c9users.io/parser', function(data) {
                 // alert(make + '+' + model);
-                // #searchform > div.content > p:nth-child(2) > span > span.l2 > span.price
-                //*[@id="searchform"]/div[4]/p[1]/span/span[3]/span[1]
-                //*[@id="titletextonly"]
                 var listings = [];
                 angular.element(data).find('span.txt').each(function(){
                     var tempTitle = angular.element(this).find('#titletextonly').text();
                     var tempPrice = parseInt(angular.element(this).find('span.price').text().slice(1));
+                    var tempUrl = angular.element(this).find('a').attr('href');
                     var tempYear = tempTitle.match(/(^|\D)(\d{4}|\d{2})(\D|$)/);
                     if (tempYear != null) {
                         tempYear = parseInt(tempYear[2]);
-                    }
-                    if (tempYear < 100) {
-                        if(tempYear > 50){
-                            tempYear += 1900;
-                        }else {
-                            tempYear += 2000;
+                        if (tempYear < 100) {   
+                            if(tempYear > 50){
+                                tempYear += 1900;
+                            } else {
+                                tempYear += 2000;
+                            }
                         }
                     }
                     if (tempPrice >= 1000 && tempYear > 0){
-                        listings.push({title: tempTitle, price: tempPrice, year: tempYear});
+                        listings.push({title: tempTitle, price: tempPrice, year: tempYear, url: tempUrl});
                     }
                 });
                 callback(listings);
