@@ -44,7 +44,7 @@
         <td>{{'$' + x.price}}</td>
         <td><a ng-href="https://austin.craigslist.org/cto/{{x.carID}}.html">{{x.carID}}</a></td>
         <td>{{x.date}}</td>
-        <td><button ng-click="post(x)">Post</button></td>
+        <td><button type="button" class="btn btn-secondary" ng-click="post(x)">Save</button></td>
         <!--{{ x.make + ' ' + x.model + ' ' x.year }}-->
       </tr>
     </table>

@@ -19,6 +19,12 @@
         .when('/parser', {
             templateUrl: 'views/parser.html',
             controller: 'ParserController'
+        })
+        
+        // analyzer control page
+        .when('/analyzer', {
+            templateUrl: 'views/analyzer.html',
+            controller: 'AnalyzerController'
         });
 
     $locationProvider.html5Mode(true);
