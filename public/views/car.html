@@ -5,19 +5,20 @@
 
     <p>{{ tagline }}</p>
     <!--<p>{{ carData }}</p>-->
-  <table style="width:100%">
+    <table class="table table-bordered table-striped" style="width:100%">
       <tr>
         <th>Make</th>
         <th>Model</th>
         <th>Year</th>
         <th>Price</th>
+        <th>Link</th>
       </tr>
       <tr ng-repeat="x in carData">
         <td>{{x.make}}</td>
         <td>{{x.model}}</td>
         <td>{{x.year}}</td>
         <td>{{'$'+x.price}}</td>
-        <!--{{ x.make + ' ' + x.model + ' ' x.year }}-->
+        <td><a ng-href="https://austin.craigslist.org/cto/{{x.carID}}.html">{{x.carID}}</a></td>
       </tr>
   </table>
 </ul>

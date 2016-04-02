@@ -1,19 +1,18 @@
 // public/js/services/ParserService.js
 angular.module('ParserService', []).factory('Parser', [ function() {
     
-    
+    // prefilter enables cross origin get request
+    angular.element.ajaxPrefilter( function (options) {
+      if (options.crossDomain && jQuery.support.cors) {
+        var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
+        options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
+        //options.url = "http://cors.corsproxy.io/url=" + options.url;
+      }
+    });
     return {
         // call to grab a page given make and model
         get : function(make, model, callback) {
             // angular.element refers to jQuery
-            // prefilter enables cross origin get request
-            angular.element.ajaxPrefilter( function (options) {
-              if (options.crossDomain && jQuery.support.cors) {
-                var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
-                options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
-                //options.url = "http://cors.corsproxy.io/url=" + options.url;
-              }
-            });
             angular.element.get('http://austin.craigslist.org/search/cto?auto_make_model=' + make + '+' + model, function(data) {
             //angular.element.get('https://craigslist-market-analyzer-ardhimas.c9users.io/parser', function(data) {
                 // alert(make + '+' + model);
@@ -34,7 +33,7 @@ angular.module('ParserService', []).factory('Parser', [ function() {
                         }
                     }
                     if (tempPrice >= 1000 && tempYear > 0){
-                        listings.push({title: tempTitle, price: tempPrice, year: tempYear, carID: tempId});
+                        listings.push({title: tempTitle, make: make, model: model, price: tempPrice, year: tempYear, carID: tempId});
                     }
                 });
                 callback(listings);

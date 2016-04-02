@@ -13,9 +13,10 @@
       </ui-select-choices>
     </ui-select>
     <br>
-    <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="parseCar(car.selected.make,car.selected.model)">Parse!</button>
-    <table style="width:100%">
-      <tr>
+    <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="parseCar(car.selected.make,car.selected.model); showTable=true">Parse!</button>
+    <br>
+    <table class="table table-bordered table-striped" style="width:100%">
+      <tr ng-show="showTable">
         <th>List Title</th>
         <th>Year</th>
         <th>Price</th>
@@ -27,7 +28,7 @@
         <!--<td>{{x.model}}</td>-->
         <td>{{x.year}}</td>
         <td>{{'$' + x.price}}</td>
-        <td>{{x.carID}}</td>
+        <td><a ng-href="https://austin.craigslist.org/cto/{{x.carID}}.html">{{x.carID}}</a></td>
         <td><button ng-click="post(x)">Post</button></td>
         <!--{{ x.make + ' ' + x.model + ' ' x.year }}-->
       </tr>

@@ -15,8 +15,14 @@ angular.module('ParserCtrl', []).controller('ParserController', function($scope,
     };
     $scope.post = function(carobj){
         Car.create(carobj);
-        $scope.tagline = carobj;
+        // $scope.tagline = carobj;
     };
+    // $scope.postAll = function(carData){
+    //     var car;
+    //     for (car in carData){
+    //         $scope.post(car);
+    //     }
+    // };
     $scope.car = {};
     $scope.carList = [
         {make: 'Honda', model: 'Civic'},

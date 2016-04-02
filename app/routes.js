@@ -61,10 +61,6 @@ var express = require('express');
             // get the car with that id (accessed at GET http://localhost:8080/api/cars/:car_id)
             .get(function(req, res) {
                 // Car.findById(req.params.car_id, function(err, car) {
-                //     if (err)
-                //         res.send(err);
-                //     res.json(car);
-                // });
                 Car.findOne({ carID: req.params.car_id},function(err, car) {
                     if (err)
                         res.send(err);
@@ -76,8 +72,9 @@ var express = require('express');
             .put(function(req, res) {
         
                 // use our car model to find the car we want
-                Car.findById(req.params.car_id, function(err, car) {
-        
+                // Car.findById(req.params.car_id, function(err, car) {
+                // TODO: modify to have more comparisons to ensure no duplicates exist
+                Car.findOne({ carID: req.params.car_id},function(err, car) {
                     if (err)
                         res.send(err);
         
@@ -102,7 +99,7 @@ var express = require('express');
             // delete the car with this id (accessed at DELETE http://localhost:8080/api/cars/:car_id)
             .delete(function(req, res) {
                 Car.remove({
-                    _id: req.params.car_id
+                    carID: req.params.car_id
                 }, function(err, car) {
                     if (err)
                         res.send(err);
