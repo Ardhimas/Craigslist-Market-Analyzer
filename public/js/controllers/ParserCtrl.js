@@ -23,6 +23,9 @@ angular.module('ParserCtrl', []).controller('ParserController', function($scope,
     //         $scope.post(car);
     //     }
     // };
+    $scope.sortType = 'date';
+    $scope.sortReverse = false;
+    
     $scope.car = {};
     $scope.carList = [
         {make: 'Honda', model: 'Civic'},

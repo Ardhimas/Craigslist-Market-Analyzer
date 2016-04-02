@@ -35,6 +35,7 @@ var express = require('express');
                 car.year = req.body.year;
                 car.price = req.body.price;
                 car.carID = req.body.carID;
+                car.date = req.body.date;
         
                 // save the car and check for errors
                 car.save(function(err) {
@@ -84,6 +85,7 @@ var express = require('express');
                     car.year = req.body.year;
                     car.price = req.body.price;
                     car.carID = req.body.carID;
+                    car.date = req.body.date;
         
                     // save the car
                     car.save(function(err) {

@@ -5,5 +5,7 @@ angular.module('CarCtrl', []).controller('CarController', function($scope, Car) 
     Car.getAll().success(function(data){
         $scope.carData = data;
     });
+    $scope.sortType = 'date';
+    $scope.sortReverse = false;
 
 });
