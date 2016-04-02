@@ -4,49 +4,66 @@
     <h1>Analyzer</h1>
 
     <p>{{ tagline }}</p>
+    <ui-select ng-model="car.selected" theme="bootstrap" ng-disabled="disabled" style="width: device-width;">
+      <ui-select-match placeholder="Select or search for a car in the list...">{{$select.selected.make + ' ' + $select.selected.model}}</ui-select-match>
+      <ui-select-choices repeat="car in carList | filter: $select.search">
+        <span ng-bind-html="car.make | highlight: $select.search"></span>
+        <small ng-bind-html="car.model | highlight: $select.search"></small>
+      </ui-select-choices>
+    </ui-select>
+    <br>
+        <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="getCarData(car.selected.make,car.selected.model); showTable=true">Analyze!</button>
+    <br>
     
-    <!--<table class="table table-bordered table-striped" style="width:100%">-->
-    <!--  <tr>-->
-    <!--    <th>-->
-    <!--      <a href="#" ng-click="sortType = 'make'; sortReverse = !sortReverse">-->
-    <!--      Make-->
-    <!--      <span ng-show="sortType == 'make'" class="fa fa-caret-down"></span>-->
-    <!--      </a>-->
-    <!--    </th>-->
-    <!--    <th>-->
-    <!--      <a href="#" ng-click="sortType = 'model'; sortReverse = !sortReverse">-->
-    <!--      Model-->
-    <!--      <span ng-show="sortType == 'model'" class="fa fa-caret-down"></span>-->
-    <!--      </a>-->
-    <!--    </th>-->
-    <!--    <th>-->
-    <!--      <a href="#" ng-click="sortType = 'year'; sortReverse = !sortReverse">-->
-    <!--      Year-->
-    <!--      <span ng-show="sortType == 'year'" class="fa fa-caret-down"></span>-->
-    <!--      </a>-->
-    <!--    </th>-->
-    <!--    <th>-->
-    <!--      <a href="#" ng-click="sortType = 'price'; sortReverse = !sortReverse">-->
-    <!--      Price-->
-    <!--      <span ng-show="sortType == 'price'" class="fa fa-caret-down"></span>-->
-    <!--      </a>-->
-    <!--    </th>-->
-    <!--    <th>Link</th>-->
-    <!--    <th>-->
-    <!--      <a href="#" ng-click="sortType = 'date'; sortReverse = !sortReverse">-->
-    <!--      Date Posted-->
-    <!--      <span ng-show="sortType == 'date'" class="fa fa-caret-down"></span>-->
-    <!--      </a>-->
-    <!--    </th>-->
-    <!--  </tr>-->
-    <!--  <tr ng-repeat="x in carData | orderBy:sortType:sortReverse">-->
-    <!--    <td>{{x.make}}</td>-->
-    <!--    <td>{{x.model}}</td>-->
-    <!--    <td>{{x.year}}</td>-->
-    <!--    <td>{{'$'+x.price}}</td>-->
-    <!--    <td><a ng-href="https://austin.craigslist.org/cto/{{x.carID}}.html">{{x.carID}}</a></td>-->
-    <!--    <td>{{x.date}}</td>-->
-    <!--  </tr>-->
-  <!--</table>-->
+    <nvd3 options="options" data="data"></nvd3>
+    <table class="table table-bordered table-striped" style="width:100%">
+      <tr>
+        <th>
+          <a href="#" ng-click="sortType = 'make'; sortReverse = !sortReverse">
+          Make
+          <span ng-show="sortType == 'make'" class="fa fa-caret-down"></span>
+          </a>
+        </th>
+        <th>
+          <a href="#" ng-click="sortType = 'model'; sortReverse = !sortReverse">
+          Model
+          <span ng-show="sortType == 'model'" class="fa fa-caret-down"></span>
+          </a>
+        </th>
+        <th>
+          <a href="#" ng-click="sortType = 'year'; sortReverse = !sortReverse">
+          Year
+          <span ng-show="sortType == 'year'" class="fa fa-caret-down"></span>
+          </a>
+        </th>
+        <th>
+          <a href="#" ng-click="sortType = 'price'; sortReverse = !sortReverse">
+          Price
+          <span ng-show="sortType == 'price'" class="fa fa-caret-down"></span>
+          </a>
+        </th>
+        <th>Link</th>
+        <th>
+          <a href="#" ng-click="sortType = 'date'; sortReverse = !sortReverse">
+          Date Posted
+          <span ng-show="sortType == 'date'" class="fa fa-caret-down"></span>
+          </a>
+        </th>
+        <th></th>
+      </tr>
+      <tr ng-repeat="x in singleCarData | orderBy:sortType:sortReverse track by $index">
+        <td>{{x.make}}</td>
+        <td>{{x.model}}</td>
+        <td>{{x.year}}</td>
+        <td>{{'$'+x.price}}</td>
+        <td><a ng-href="https://austin.craigslist.org/cto/{{x.carID}}.html">{{x.carID}}</a></td>
+        <td>{{x.date}}</td>
+        <td>
+          <button type="button" class="btn btn-danger" ng-click="delete(x.carID); removeRow(x)">
+            Delete
+          </button>
+        </td>
+      </tr>
+  </table>
 
 </div>

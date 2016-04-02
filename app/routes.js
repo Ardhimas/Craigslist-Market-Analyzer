@@ -109,6 +109,17 @@ var express = require('express');
                     res.json({ message: 'Successfully deleted' });
                 });
             });
+            
+        router.route('/cars/:make/:model')
+            // get the car with that id (accessed at GET http://localhost:8080/api/cars/:car_id)
+            .get(function(req, res) {
+                // Car.findById(req.params.car_id, function(err, car) {
+                Car.find({ make: req.params.make, model: req.params.model},function(err, car) {
+                    if (err)
+                        res.send(err);
+                    res.json(car);
+                });
+            });
 
         
         // REGISTER OUR ROUTES -------------------------------

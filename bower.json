@@ -9,7 +9,8 @@
     "angular": "latest",
     "angular-route": "latest",
     "angular-ui-select": "latest",
-    "angular-sanitize": "latest"
+    "angular-sanitize": "latest",
+    "angular-nvd3": "latest"
   },
   "resolutions": {
     "angular": "1.5.3"
