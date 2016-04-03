@@ -17,7 +17,7 @@ angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', functi
     $scope.getCarData = function(make,model){
         Car.getByMakeModel(make,model).success(function(data){
             $scope.singleCarData = data;
-            $scope.tagline = Analyzer.yearCount(data);
+            $scope.yearData = Analyzer.yearCount(data);
         });
     };
     $scope.options = {
@@ -34,7 +34,7 @@ angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', functi
             y: function(d){ return d.value; },
             showValues: true,
             valueFormat: function(d){
-                return d3.format(',.4f')(d);
+                return d3.format(',.d')(d);
             },
             transitionDuration: 500,
             xAxis: {
@@ -42,7 +42,9 @@ angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', functi
             },
             yAxis: {
                 axisLabel: 'Count',
-                axisLabelDistance: 30
+                // axisLabelDistance: 30,
+                tickFormat: d3.format('.0f'),
+                ticks: 0
             }
         }
     };
