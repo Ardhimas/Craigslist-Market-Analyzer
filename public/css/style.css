@@ -51,6 +51,12 @@
 .navbar-default .navbar-link:hover {
   color: #f9f8fb;
 }
+/*.graphs {*/
+/*  display: inline-block;*/
+/*}*/
+body {
+  font-size: 1.8vw;
+}
 
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {

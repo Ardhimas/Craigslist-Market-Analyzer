@@ -15,9 +15,10 @@
         <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="getCarData(car.selected.make,car.selected.model); showTable=true">Analyze!</button>
     <br>
     
-    <nvd3 options="options" data="yearData"></nvd3>
+    <nvd3 options="barChartOptions" data="yearCountData" class="graphs"></nvd3>
+    <nvd3 options="boxPlotOptions" data="yearPriceData" class="graphs"></nvd3>
     <table class="table table-bordered table-striped" style="width:100%">
-      <tr>
+      <tr ng-show="showTable">
         <th>
           <a href="#" ng-click="sortType = 'make'; sortReverse = !sortReverse">
           Make

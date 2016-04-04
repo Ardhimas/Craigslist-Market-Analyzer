@@ -17,10 +17,12 @@ angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', functi
     $scope.getCarData = function(make,model){
         Car.getByMakeModel(make,model).success(function(data){
             $scope.singleCarData = data;
-            $scope.yearData = Analyzer.yearCount(data);
+            $scope.yearCountData = Analyzer.yearCount(data);
+            $scope.yearPriceData = Analyzer.yearPrice(data);
+            // $scope.tagline = Analyzer.yearPrice(data);
         });
     };
-    $scope.options = {
+    $scope.barChartOptions = {
         chart: {
             type: 'discreteBarChart',
             height: 350,
@@ -28,7 +30,7 @@ angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', functi
                 top: 20,
                 right: 20,
                 bottom: 60,
-                left: 55
+                left: 70
             },
             x: function(d){ return d.label; },
             y: function(d){ return d.value; },
@@ -46,6 +48,23 @@ angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', functi
                 tickFormat: d3.format('.0f'),
                 ticks: 0
             }
+        }
+    };
+    $scope.boxPlotOptions = {
+        chart: {
+            type: 'boxPlotChart',
+            height: 450,
+            margin : {
+                top: 20,
+                right: 20,
+                bottom: 60,
+                left: 70
+            },
+            // color:['darkblue', 'darkorange', 'green', 'darkred', 'darkviolet'],
+            x: function(d){return d.label;},
+            // y: function(d){return d.values.Q3;},
+            // maxBoxWidth: 75,
+            // yDomain: [0, 500]
         }
     };
     $scope.car = {};
