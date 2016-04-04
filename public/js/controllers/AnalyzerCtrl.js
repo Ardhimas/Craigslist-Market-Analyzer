@@ -25,7 +25,7 @@ angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', functi
     $scope.barChartOptions = {
         chart: {
             type: 'discreteBarChart',
-            height: 350,
+            height: 300,
             margin : {
                 top: 20,
                 right: 20,
@@ -53,7 +53,7 @@ angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', functi
     $scope.boxPlotOptions = {
         chart: {
             type: 'boxPlotChart',
-            height: 450,
+            height: 500,
             margin : {
                 top: 20,
                 right: 20,

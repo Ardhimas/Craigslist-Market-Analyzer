@@ -30,6 +30,7 @@ angular.module('ParserCtrl', []).controller('ParserController', function($scope,
     $scope.carList = [
         {make: 'Honda', model: 'Civic'},
         {make: 'Honda', model: 'Accord'},
+        {make: 'Mazda', model: 'Miata'},
         {make: 'Toyota', model: 'Corolla'},
         {make: 'Toyota', model: 'Camry'}
     ];

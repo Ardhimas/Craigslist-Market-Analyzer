@@ -70,7 +70,7 @@ angular.module('AnalyzerService', []).factory('Analyzer', [function() {
                     valueList.push({"label":price, "values": boxValues});
                 }
             }
-            var boxPlotData = [{key:"Year Data", values: valueList}];
+            // var boxPlotData = [{key:"Year Data", values: valueList}];
             // console.log($http.get('/api/cars'));
             return valueList;
         }
