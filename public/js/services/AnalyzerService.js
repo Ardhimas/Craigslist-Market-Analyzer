@@ -2,7 +2,8 @@
 angular.module('AnalyzerService', []).factory('Analyzer', [function() {
 
     function findMedian(list) {
-        var middle = Math.floor((list.length - 1) / 2); // NB: operator precedence
+        // list.sort();
+        var middle = Math.floor((list.length - 1) / 2);
         if (list.length % 2) {
             return list[middle];
         } else {
@@ -11,6 +12,7 @@ angular.module('AnalyzerService', []).factory('Analyzer', [function() {
     }
     
     function findUpperQuartile(list) {
+        // list.sort();
         var middle = Math.floor((list.length - 1) / 2);
         // if (list.length % 2){
         return findMedian(list.slice(middle));
@@ -20,6 +22,7 @@ angular.module('AnalyzerService', []).factory('Analyzer', [function() {
     }
     
     function findLowerQuartile(list) {
+        // list.sort();
         var middle = Math.floor((list.length - 1) / 2);
         // if (list.length % 2){
         return findMedian(list.slice(0,middle + 1));
@@ -56,7 +59,7 @@ angular.module('AnalyzerService', []).factory('Analyzer', [function() {
                 } else {
                     priceList[data[car].year] = [data[car].price];
                 }
-                priceList[data[car].year].sort();
+                priceList[data[car].year].sort(function(a, b){return a-b});
             }
             var valueList = [];
             for (var price in priceList) {

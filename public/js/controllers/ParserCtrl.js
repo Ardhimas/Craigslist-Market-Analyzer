@@ -7,6 +7,7 @@ angular.module('ParserCtrl', []).controller('ParserController', function($scope,
     function showList(listings){
         $scope.$apply(function(){
             $scope.listData = listings;
+            // Car.createMultiple(listings);
             // $scope.tagline = listings;
         });
     }
@@ -17,23 +18,20 @@ angular.module('ParserCtrl', []).controller('ParserController', function($scope,
         Car.create(carobj);
         // $scope.tagline = carobj;
     };
-    // $scope.postAll = function(carData){
-    //     var car;
-    //     for (car in carData){
-    //         $scope.post(car);
-    //     }
-    // };
+    $scope.postAll = function(){
+        Car.createMultiple($scope.listData);
+    };
     $scope.sortType = 'date';
     $scope.sortReverse = false;
     
     $scope.car = {};
-    $scope.carList = [
-        {make: 'Honda', model: 'Civic'},
-        {make: 'Honda', model: 'Accord'},
-        {make: 'Mazda', model: 'Miata'},
-        {make: 'Toyota', model: 'Corolla'},
-        {make: 'Toyota', model: 'Camry'}
-    ];
+    // $scope.carList = [
+    //     {make: 'Honda', model: 'Civic'},
+    //     {make: 'Honda', model: 'Accord'},
+    //     {make: 'Mazda', model: 'Miata'},
+    //     {make: 'Toyota', model: 'Corolla'},
+    //     {make: 'Toyota', model: 'Camry'}
+    // ];
 
 
 });

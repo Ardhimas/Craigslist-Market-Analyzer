@@ -19,7 +19,7 @@ angular.module('ParserService', []).factory('Parser', [ function() {
                 var listings = [];
                 var totalCount = parseInt(angular.element(data).find('span.button.pagenum > span.totalcount').first().text());
                 var promises = [];
-                var extraPages = Math.floor((totalCount - 1)/100);
+                var extraPages = (totalCount > 100) ? Math.floor((totalCount - 1)/100) : 0;
                 for(extraPages; extraPages>=0; extraPages--) {
                     // alert(extraPages);
                     promises.push(angular.element.get('http://austin.craigslist.org/search/cto?s= ' + extraPages*100 + '&auto_make_model=' + make + '%20' + model, function(data) {
@@ -38,8 +38,12 @@ angular.module('ParserService', []).factory('Parser', [ function() {
                                         tempYear += 2000;
                                     }
                                 }
+                                if (tempYear < 1950 || tempYear > 2020){
+                                    // Invalidate bad years
+                                    tempYear = 0;
+                                }
                             }
-                            if (tempPrice >= 1000 && tempYear > 0){
+                            if (tempPrice >= 1000 && tempYear > 0 && tempId > 1){
                                 listings.push({title: tempTitle, make: make, model: model, price: tempPrice, year: tempYear, carID: tempId, date: tempDate});
                                 // alert("pushed" +tempTitle);
                             }
@@ -47,6 +51,7 @@ angular.module('ParserService', []).factory('Parser', [ function() {
                     }));
                 }
                 Promise.all(promises).then(function() {
+                    // alert("callback");
                     callback(listings);
                 });
                 

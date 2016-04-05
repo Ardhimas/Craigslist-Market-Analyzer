@@ -1,51 +1,53 @@
 <!-- public/views/parser.html -->
 
 <div class="jumbotron text-center" data-ng-controller="ParserController">
-    <h1>Parser</h1>
+  <h1>Parser</h1>
 
-    <p>{{ tagline }}</p>
-    <!--<p>Selected: {{car.selected}}</p>-->
-    <ui-select ng-model="car.selected" theme="bootstrap" ng-disabled="disabled" style="width: device-width;">
-      <ui-select-match placeholder="Select or search for a car in the list...">{{$select.selected.make + ' ' + $select.selected.model}}</ui-select-match>
-      <ui-select-choices repeat="car in carList | filter: $select.search">
-        <span ng-bind-html="car.make | highlight: $select.search"></span>
-        <small ng-bind-html="car.model | highlight: $select.search"></small>
-      </ui-select-choices>
-    </ui-select>
-    <br>
-    <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="parseCar(car.selected.make,car.selected.model); showTable=true">Parse!</button>
-    <br>
-    <table class="table table-bordered table-striped" style="width:100%">
-      <tr ng-show="showTable">
-        <th>List Title</th>
-        <th>
-          <a href="#" ng-click="sortType = 'year'; sortReverse = !sortReverse">
-          Year
-          <span ng-show="sortType == 'year'" class="fa fa-caret-down">
-        </th>
-        <th>
-          <a href="#" ng-click="sortType = 'price'; sortReverse = !sortReverse">
-          Price
-          <span ng-show="sortType == 'price'" class="fa fa-caret-down">
-        </th>
-        <th>ID</th>
-        <th>
-          <a href="#" ng-click="sortType = 'date'; sortReverse = !sortReverse">
-          Date Posted
-          <span ng-show="sortType == 'date'" class="fa fa-caret-down"></span>
-          </a>
-        </th>
-        <th></th>
-      </tr>
-      <tr ng-repeat="x in this.listData | orderBy:sortType:sortReverse">
-        <td>{{x.title}}</td>
-        <!--<td>{{x.model}}</td>-->
-        <td>{{x.year}}</td>
-        <td>{{'$' + x.price}}</td>
-        <td><a ng-href="https://austin.craigslist.org/cto/{{x.carID}}.html">{{x.carID}}</a></td>
-        <td>{{x.date}}</td>
-        <td><button type="button" class="btn btn-secondary" ng-click="post(x)">Save</button></td>
-        <!--{{ x.make + ' ' + x.model + ' ' x.year }}-->
-      </tr>
-    </table>
+  <p>{{ tagline }}</p>
+  <!--<p>Selected: {{car.selected}}</p>-->
+  <ui-select ng-model="car.selected" theme="bootstrap" ng-disabled="disabled" style="width: device-width;">
+    <ui-select-match placeholder="Select or search for a car in the list...">{{$select.selected.make + ' ' + $select.selected.model}}</ui-select-match>
+    <ui-select-choices repeat="car in carList | filter: $select.search">
+      <span ng-bind-html="car.make | highlight: $select.search"></span>
+      <small ng-bind-html="car.model | highlight: $select.search"></small>
+    </ui-select-choices>
+  </ui-select>
+  <br>
+  <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="parseCar(car.selected.make,car.selected.model); showTable=true">Parse!</button>
+  <br>
+  <table class="table table-bordered table-striped" style="width:100%">
+    <tr ng-show="showTable">
+      <th>List Title</th>
+      <th>
+        <a href="#" ng-click="sortType = 'year'; sortReverse = !sortReverse">
+        Year
+        <span ng-show="sortType == 'year'" class="fa fa-caret-down">
+      </th>
+      <th>
+        <a href="#" ng-click="sortType = 'price'; sortReverse = !sortReverse">
+        Price
+        <span ng-show="sortType == 'price'" class="fa fa-caret-down">
+      </th>
+      <th>ID</th>
+      <th>
+        <a href="#" ng-click="sortType = 'date'; sortReverse = !sortReverse">
+        Date Posted
+        <span ng-show="sortType == 'date'" class="fa fa-caret-down"></span>
+        </a>
+      </th>
+      <th>
+        <button type="button" class="btn btn-primary" ng-click="postAll()">Save All</button>
+      </th>
+    </tr>
+    <tr ng-repeat="x in this.listData | orderBy:sortType:sortReverse">
+      <td>{{x.title}}</td>
+      <!--<td>{{x.model}}</td>-->
+      <td>{{x.year}}</td>
+      <td>{{'$' + x.price}}</td>
+      <td><a ng-href="https://austin.craigslist.org/cto/{{x.carID}}.html">{{x.carID}}</a></td>
+      <td>{{x.date}}</td>
+      <td><button type="button" class="btn btn-secondary" ng-click="post(x)">Save</button></td>
+      <!--{{ x.make + ' ' + x.model + ' ' x.year }}-->
+    </tr>
+  </table>
 </div>

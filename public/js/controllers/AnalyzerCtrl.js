@@ -1,5 +1,5 @@
 // public/js/controllers/AnalyzerCtrl.js
-angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', function($scope, Analyzer, Car) {
+angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', function($rootScope, $scope, Analyzer, Car) {
 
     $scope.tagline = 'Price analyzer';
     
@@ -68,11 +68,12 @@ angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', functi
         }
     };
     $scope.car = {};
-    $scope.carList = [
-        {make: 'Honda', model: 'Civic'},
-        {make: 'Honda', model: 'Accord'},
-        {make: 'Toyota', model: 'Corolla'},
-        {make: 'Toyota', model: 'Camry'}
-    ];
+    // $scope.carList = $rootScope.carList;
+    // $scope.carList = [
+    //     {make: 'Honda', model: 'Civic'},
+    //     {make: 'Honda', model: 'Accord'},
+    //     {make: 'Toyota', model: 'Corolla'},
+    //     {make: 'Toyota', model: 'Camry'}
+    // ];
 
 });

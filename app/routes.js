@@ -109,7 +109,6 @@ var express = require('express');
                 }, function(err, car) {
                     if (err)
                         res.send(err);
-        
                     res.json({ message: 'Successfully deleted' });
                 });
             });
@@ -122,6 +121,18 @@ var express = require('express');
                     if (err)
                         res.send(err);
                     res.json(car);
+                });
+            })
+            
+            .delete(function(req, res) {
+                Car.remove({
+                    make: req.params.make,
+                    model: req.params.model,
+                    carID: null
+                }, function(err, car) {
+                    if (err)
+                        res.send(err);
+                    res.json({ message: 'Successfully deleted' });
                 });
             });
 

@@ -27,6 +27,12 @@ angular.module('CarService', []).factory('Car', ['$http', function($http) {
             //     carData.year+'&price='+carData.price+'&id='+carData.carid;
             return $http.post('/api/cars', carData);
         },
+        
+        createMultiple : function(carList) {
+            for (var car in carList){
+                $http.post('/api/cars',carList[car]);
+            }  
+        },
 
         // call to DELETE a car
         delete : function(id) {
