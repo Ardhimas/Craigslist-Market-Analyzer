@@ -28,22 +28,26 @@ var express = require('express');
         
             // create a car (accessed at POST http://localhost:8080/api/cars)
             .post(function(req, res) {
-                
-                var car = new Car();      // create a new instance of the Car model
-                car.make = req.body.make;  // set the cars name (comes from the request)
-                car.model = req.body.model;
-                car.year = req.body.year;
-                car.price = req.body.price;
-                car.carID = req.body.carID;
-                car.date = req.body.date;
-        
-                // save the car and check for errors
-                car.save(function(err) {
+                Car.findOneAndUpdate({carID:req.body.carID}, req.body, {upsert:true}, function(err,car){
                     if (err)
                         res.send(err);
-        
-                    res.json({ message: 'Car made!' });
+                    res.json({message: 'Car saved'});
                 });
+                // var car = new Car();      // create a new instance of the Car model
+                // car.make = req.body.make;  // set the cars name (comes from the request)
+                // car.model = req.body.model;
+                // car.year = req.body.year;
+                // car.price = req.body.price;
+                // car.carID = req.body.carID;
+                // car.date = req.body.date;
+        
+                // // save the car and check for errors
+                // car.save(function(err) {
+                //     if (err)
+                //         res.send(err);
+        
+                //     res.json({ message: 'Car made!' });
+                // });
             })
         
             // get all the cars (accessed at GET http://localhost:8080/api/cars)
