@@ -29,6 +29,43 @@ angular.module('AnalyzerService', []).factory('Analyzer', [function() {
         
     }
     
+    function findOutliers(list, lowerQuartile, upperQuartile) {
+        var interQuartileRange = upperQuartile - lowerQuartile;
+        var lowerFence = lowerQuartile - 1.5 * interQuartileRange;
+        var upperFence = upperQuartile + 1.5 * interQuartileRange;
+        var outlierList = [];
+        for (var num in list) {
+            if (list[num] < lowerFence || list[num] > upperFence) {
+                console.log(list[num] + " LF: " + lowerFence + " UF: " + upperFence);
+                outlierList.push(list[num]);
+            }
+        }
+        return outlierList;
+    }
+    
+    // Whiskers are max/min value in list that are still within 1.5 IQR of the upper/lower quartile.
+    function findWhiskers(list, lowerQuartile, upperQuartile) {
+        if(list.length == 2){
+            return {lowerWhisker: list[0], upperWhisker: list[1]};
+        }else if(list.length == 1){
+            return {lowerWhisker: list[0], upperWhisker: list[0]};
+        }
+        var interQuartileRange = upperQuartile - lowerQuartile;
+        var lowerFence = lowerQuartile - 1.5 * interQuartileRange;
+        var upperFence = upperQuartile + 1.5 * interQuartileRange;
+        var lowerWhisker = Number.MAX_VALUE;
+        var upperWhisker = 0;
+        for (var num in list) {
+            if (list[num] > lowerFence && list[num] < lowerWhisker) {
+                lowerWhisker = list[num];
+            }
+            if (list[num] < upperFence && list[num] > upperWhisker) {
+                upperWhisker = list[num];
+            }
+        }
+        return {lowerWhisker: lowerWhisker, upperWhisker: upperWhisker};
+    }
+    
     return {
         // call to get all cars
         yearCount : function(data) {
@@ -68,8 +105,11 @@ angular.module('AnalyzerService', []).factory('Analyzer', [function() {
                     boxValues.Q1 = findLowerQuartile(priceList[price]);
                     boxValues.Q2 = findMedian(priceList[price]);
                     boxValues.Q3 = findUpperQuartile(priceList[price]);
-                    boxValues.whisker_low = Math.min.apply(null,priceList[price]);
-                    boxValues.whisker_high = Math.max.apply(null,priceList[price]);
+                    var whiskers = findWhiskers(priceList[price], boxValues.Q1, boxValues.Q3)
+                    boxValues.whisker_low = whiskers.lowerWhisker;
+                    boxValues.whisker_high = whiskers.upperWhisker;
+                    boxValues.outliers = findOutliers(priceList[price], boxValues.Q1, boxValues.Q3);
+                    console.log(boxValues);
                     valueList.push({"label":price, "values": boxValues});
                 }
             }

@@ -54,9 +54,32 @@
 /*.graphs {*/
 /*  display: inline-block;*/
 /*}*/
-body {
-  font-size: 1.8vw;
+/*body {*/
+  /*font-size: 1.8vw;*/
+/*}*/
+
+.tick line {
+  opacity: 0.2;
 }
+.tick text {
+  opacity: 0.8;
+}
+/*svg.nvd3-svg {*/
+/*  fill: #c8c8c8;*/
+/*}*/
+.nvd3 .nv-axis line {
+  stroke: #c8c8c8;
+}
+.nvd3 .nv-discretebar .nv-groups text, .nvd3 .nv-multibarHorizontal .nv-groups text, .nvd3 text {
+  fill: #c8c8c8;
+}
+.nvtooltip {
+  color: #c8c8c8;
+}
+small {
+  color: #c8c8c8;
+}
+
 
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
@@ -71,5 +94,14 @@ body {
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
     color: #f9f8fb;
     background-color: #962bc0;
+  }
+  .btn-danger {
+    padding: 2px 4px; 
+    font-size: 80%; 
+    line-height: 1; 
+    border-radius: 3px; 
+  }
+  body {
+    font-size: 3vw;
   }
 }

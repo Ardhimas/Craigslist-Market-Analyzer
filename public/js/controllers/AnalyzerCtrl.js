@@ -48,6 +48,10 @@ angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', functi
                 tickFormat: d3.format('.0f'),
                 ticks: 0
             }
+        },
+        title: {
+            enable: true,
+            text: 'Data Quantity by Year'
         }
     };
     $scope.boxPlotOptions = {
@@ -65,6 +69,10 @@ angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', functi
             // y: function(d){return d.values.Q3;},
             // maxBoxWidth: 75,
             // yDomain: [0, 500]
+        },
+        title: {
+            enable: true,
+            text: 'Box Plot Price Distribution by Year'
         }
     };
     $scope.car = {};
