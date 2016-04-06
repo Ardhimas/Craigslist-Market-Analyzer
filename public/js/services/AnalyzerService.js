@@ -99,18 +99,18 @@ angular.module('AnalyzerService', []).factory('Analyzer', [function() {
                 priceList[data[car].year].sort(function(a, b){return a-b});
             }
             var valueList = [];
-            for (var price in priceList) {
+            for (var year in priceList) {
                 var boxValues = {};
-                if(priceList.hasOwnProperty(price)) {
-                    boxValues.Q1 = findLowerQuartile(priceList[price]);
-                    boxValues.Q2 = findMedian(priceList[price]);
-                    boxValues.Q3 = findUpperQuartile(priceList[price]);
-                    var whiskers = findWhiskers(priceList[price], boxValues.Q1, boxValues.Q3)
+                if(priceList.hasOwnProperty(year)) {
+                    boxValues.Q1 = findLowerQuartile(priceList[year]);
+                    boxValues.Q2 = findMedian(priceList[year]);
+                    boxValues.Q3 = findUpperQuartile(priceList[year]);
+                    var whiskers = findWhiskers(priceList[year], boxValues.Q1, boxValues.Q3);
                     boxValues.whisker_low = whiskers.lowerWhisker;
                     boxValues.whisker_high = whiskers.upperWhisker;
-                    boxValues.outliers = findOutliers(priceList[price], boxValues.Q1, boxValues.Q3);
+                    boxValues.outliers = findOutliers(priceList[year], boxValues.Q1, boxValues.Q3);
                     console.log(boxValues);
-                    valueList.push({"label":price, "values": boxValues});
+                    valueList.push({"label":year, "values": boxValues});
                 }
             }
             // var boxPlotData = [{key:"Year Data", values: valueList}];

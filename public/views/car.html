@@ -4,7 +4,16 @@
     <h1>Car Listing</h1>
 
     <p>{{ tagline }}</p>
-    
+    <ui-select ng-model="car.selected" theme="bootstrap" ng-disabled="disabled" style="width: device-width;">
+      <ui-select-match placeholder="Filter by make and model">{{$select.selected.make + ' ' + $select.selected.model}}</ui-select-match>
+      <ui-select-choices repeat="car in carList | filter: $select.search">
+        <small ng-bind-html="car.make | highlight: $select.search"></small>
+        <small ng-bind-html="car.model | highlight: $select.search"></small>
+        <!--<small ng-bind-html="car.make"></small>-->
+        <!--<small ng-bind-html="car.model"></small>-->
+      </ui-select-choices>
+    </ui-select>
+    <br>
     <table class="table table-bordered table-striped" style="width:100%">
       <tr>
         <th>
@@ -40,7 +49,8 @@
         </th>
         <th></th>
       </tr>
-      <tr ng-repeat="x in carData | orderBy:sortType:sortReverse track by $index">
+      <tr ng-repeat="x in carData | orderBy:sortType:sortReverse | filter:
+      {model:car.selected.model} track by $index">
         <td>{{x.make}}</td>
         <td>{{x.model}}</td>
         <td>{{x.year}}</td>
@@ -48,7 +58,7 @@
         <td><a ng-href="https://austin.craigslist.org/cto/{{x.carID}}.html">{{x.carID}}</a></td>
         <td>{{x.date}}</td>
         <td>
-          <button type="button" class="btn btn-danger" ng-click="delete(x.carID); removeRow(x)">
+          <button type="button" class="btn btn-danger" ng-click="removeCar(x)">
             Delete
           </button>
         </td>

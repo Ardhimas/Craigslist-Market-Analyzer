@@ -1,27 +1,35 @@
 // public/js/controllers/AnalyzerCtrl.js
-angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', function($rootScope, $scope, Analyzer, Car) {
-
-    $scope.tagline = 'Price analyzer';
-    
+angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', function($rootScope, $scope, $filter, Analyzer, Car) {
+    $scope.tagline = 'Choose vehicle to analyze';
     $scope.sortType = 'date';
-    $scope.sortReverse = false;
-    $scope.removeRow = function(item) {
-      $scope.singleCarData.splice($scope.singleCarData.indexOf(item), 1);
+    $scope.sortReverse = true;
+    function updateGraphs() {
+        $scope.yearCountData = Analyzer.yearCount($scope.singleCarData);
+        $scope.yearPriceData = Analyzer.yearPrice($scope.singleCarData);
+    }
+    $scope.removeCar = function(car) {
+        $scope.singleCarData.splice($scope.singleCarData.indexOf(car), 1);
+        Car.delete(car.carID);
+        updateGraphs();
+        // $scope.yearCountData = Analyzer.yearCount($scope.singleCarData);
     };
-    // function showCharts(data){
-    //     $scope.$apply(function(){
-    //         // $scope.singleCarData = data;
-    //         // $scope.tagline = data;
-    //     });
-    // }
     $scope.getCarData = function(make,model){
         Car.getByMakeModel(make,model).success(function(data){
             $scope.singleCarData = data;
-            $scope.yearCountData = Analyzer.yearCount(data);
-            $scope.yearPriceData = Analyzer.yearPrice(data);
-            // $scope.tagline = Analyzer.yearPrice(data);
+            updateGraphs();// $scope.tagline = Analyzer.yearPrice(data);
         });
     };
+    $scope.lessThan = function(val){
+        return function(data){
+            return (parseInt(data.label) <= val);
+        };
+    };
+    $scope.greaterThan = function(val){
+        return function(data){
+            return (parseInt(data.label) >= val);
+        };
+    };
+    // $scope.filteredData = $filter('yearFilter')($scope.singleCarData,{year:})
     $scope.barChartOptions = {
         chart: {
             type: 'discreteBarChart',
@@ -72,7 +80,7 @@ angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', functi
         },
         title: {
             enable: true,
-            text: 'Box Plot Price Distribution by Year'
+            text: 'Price Distribution by Year'
         }
     };
     $scope.car = {};
