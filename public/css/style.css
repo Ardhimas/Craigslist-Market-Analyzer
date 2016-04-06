@@ -79,8 +79,9 @@
 small {
   color: #c8c8c8;
 }
-
-
+.btn-danger {
+  padding: 2px 4px;
+}
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
     color: #f0dcfd;
@@ -95,8 +96,7 @@ small {
     color: #f9f8fb;
     background-color: #962bc0;
   }
-  .btn-danger {
-    padding: 2px 4px; 
+  .btn-danger { 
     font-size: 80%; 
     line-height: 1; 
     border-radius: 3px; 

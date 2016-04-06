@@ -16,20 +16,46 @@ angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', functi
     $scope.getCarData = function(make,model){
         Car.getByMakeModel(make,model).success(function(data){
             $scope.singleCarData = data;
+            // $scope.yearCountData = Analyzer.yearCount($scope.singleCarData);
+            // $scope.yearPriceData = Analyzer.yearPrice($scope.singleCarData);
+    
             updateGraphs();// $scope.tagline = Analyzer.yearPrice(data);
         });
     };
     $scope.lessThan = function(val){
         return function(data){
-            return (parseInt(data.label) <= val);
+            if(val){
+                console.log(data.label + ' ' + val);
+                return (parseInt(data.label) <= parseInt(val.label));
+            }
+            else
+                return true;
         };
     };
     $scope.greaterThan = function(val){
         return function(data){
-            return (parseInt(data.label) >= val);
+            if (val){
+                console.log(data.label + ' ' + val);
+                return (parseInt(data.label) >= parseInt(val.label));
+            }
+            else
+                return true;
         };
     };
-    // $scope.filteredData = $filter('yearFilter')($scope.singleCarData,{year:})
+    $scope.filterGraph = function(startYear, endYear){
+        var filteredData = [];
+        for (var listing in $scope.singleCarData) {
+            if($scope.singleCarData.hasOwnProperty(listing)){
+                console.log("log" + $scope.singleCarData[listing].year);
+                if(parseInt($scope.singleCarData[listing].year) >= startYear && parseInt($scope.singleCarData[listing].year) <= endYear){
+                    filteredData.push($scope.singleCarData[listing]);
+                }
+            }
+        }
+        console.log("Filtered data:" + filteredData);
+        $scope.yearCountData = Analyzer.yearCount(filteredData);
+        $scope.yearPriceData = Analyzer.yearPrice(filteredData);
+    };
     $scope.barChartOptions = {
         chart: {
             type: 'discreteBarChart',
@@ -84,6 +110,9 @@ angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', functi
         }
     };
     $scope.car = {};
+    $scope.startingYear = {};
+    $scope.endingYear = {};
+    // $scope.tagline = $scope.startingYear.selected + ' ' + $scope.endingYear.selected;
     // $scope.carList = $rootScope.carList;
     // $scope.carList = [
     //     {make: 'Honda', model: 'Civic'},

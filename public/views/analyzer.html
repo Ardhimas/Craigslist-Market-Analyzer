@@ -15,27 +15,26 @@
     <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="getCarData(car.selected.make,car.selected.model); showTable=true">Analyze!</button>
     <br>
     <div id="buttonContainer" style="width: device-width; position: relative;">
-      <ui-select ng-show="showTable" ng-model="startingYear.selected" theme="bootstrap" ng-disabled="disabled" style="width: 50%;float:left">
+      <ui-select ng-show="showTable" ng-model="startingYear.selected" theme="bootstrap" ng-disabled="disabled" style="width: 50%; float:left">
         <ui-select-match placeholder="Select starting year">{{$select.selected.label}}</ui-select-match>
-        <ui-select-choices repeat="year in yearPriceData | filter: lessThan(2005) | filter: $select.search">
-          <small ng-bind-html="year.label | highlight: $select.search"></smagit ll>
+        <ui-select-choices repeat="year in yearPriceData | filter: lessThan(endingYear.selected) | filter: $select.search">
+          <small ng-bind-html="year.label | highlight: $select.search"></small>
         </ui-select-choices>
       </ui-select>
       <ui-select ng-show="showTable" ng-model="endingYear.selected" theme="bootstrap" ng-disabled="disabled" style="width: 50%;float:right">
         <ui-select-match placeholder="Select ending year">{{$select.selected.label}}</ui-select-match>
-        <ui-select-choices repeat="year in yearPriceData | filter: greaterThan(2005) | filter: $select.search" >
+        <ui-select-choices repeat="year in yearPriceData | filter: greaterThan(startingYear.selected) | filter: $select.search" >
           <small ng-bind-html="year.label | highlight: $select.search"></small>
         </ui-select-choices>
       </ui-select>
     </div>
     <br>
-    <button ng-show="showTable" type="button" class="btn btn-primary btn-lg btn-block" ng-click="filter">Filter</button>
+    <button ng-show="showTable" type="button" class="btn btn-primary btn-lg btn-block" ng-click="filterGraph(startingYear.selected.label, endingYear.selected.label)">Filter</button>
     <br>
     <nvd3 ng-show="showTable" options="barChartOptions" data="yearCountData" class="graphs"></nvd3>
     <nvd3 ng-show="showTable" options="boxPlotOptions" data="yearPriceData"  class="graphs"></nvd3>
     <table ng-show="showTable" class="table table-bordered table-striped" style="width:100%">
-      <!--<tr ng-show="showTable">-->
-      <tr>
+      <tr ng-show="showTable" >
         <!--<th>-->
         <!--  <a href="#" ng-click="sortType = 'make'; sortReverse = !sortReverse">-->
         <!--  Make-->
