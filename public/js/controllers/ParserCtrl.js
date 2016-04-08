@@ -22,7 +22,7 @@ angular.module('ParserCtrl', []).controller('ParserController', function($scope,
         Car.createMultiple($scope.listData);
     };
     $scope.sortType = 'date';
-    $scope.sortReverse = false;
+    $scope.sortReverse = true;
     
     $scope.car = {};
     // $scope.carList = [

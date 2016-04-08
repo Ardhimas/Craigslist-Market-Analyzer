@@ -5,13 +5,21 @@
 
   <p>{{ tagline }}</p>
   <!--<p>Selected: {{car.selected}}</p>-->
-  <ui-select ng-model="car.selected" theme="bootstrap" ng-disabled="disabled" style="width: device-width;">
-    <ui-select-match placeholder="Select or search for a car in the list...">{{$select.selected.make + ' ' + $select.selected.model}}</ui-select-match>
-    <ui-select-choices repeat="car in carList | filter: $select.search">
-      <small ng-bind-html="car.make | highlight: $select.search"></small>
-      <small ng-bind-html="car.model | highlight: $select.search"></small>
-    </ui-select-choices>
-  </ui-select>
+  <div id="buttonContainer" style="width: device-width; position: relative;">
+    <ui-select ng-model="city.selected" theme="bootstrap" ng-disabled="disabled" style="width: 50%; float: left;">
+      <ui-select-match placeholder="Select or search for a city in the list...">{{$select.selected.name}}</ui-select-match>
+      <ui-select-choices repeat="city in cityList | filter: $select.search">
+        <small ng-bind-html="city.name | highlight: $select.search"></small>
+      </ui-select-choices>
+    </ui-select>
+    <ui-select ng-model="car.selected" theme="bootstrap" ng-disabled="disabled" style="width: 50%; float: right;">
+      <ui-select-match placeholder="Select or search for a car in the list...">{{$select.selected.make + ' ' + $select.selected.model}}</ui-select-match>
+      <ui-select-choices repeat="car in carList | filter: $select.search">
+        <small ng-bind-html="car.make | highlight: $select.search"></small>
+        <small ng-bind-html="car.model | highlight: $select.search"></small>
+      </ui-select-choices>
+    </ui-select>
+  </div>
   <br>
   <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="parseCar(car.selected.make,car.selected.model); showTable=true">Parse!</button>
   <br>

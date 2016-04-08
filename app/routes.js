@@ -90,6 +90,7 @@ var express = require('express');
                     car.price = req.body.price;
                     car.carID = req.body.carID;
                     car.date = req.body.date;
+                    car.city = req.body.city;
         
                     // save the car
                     car.save(function(err) {

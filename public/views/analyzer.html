@@ -15,13 +15,13 @@
     <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="getCarData(car.selected.make,car.selected.model); showTable=true">Analyze!</button>
     <br>
     <div id="buttonContainer" style="width: device-width; position: relative;">
-      <ui-select ng-show="showTable" ng-model="startingYear.selected" theme="bootstrap" ng-disabled="disabled" style="width: 50%; float:left">
+      <ui-select ng-show="showTable" ng-model="startingYear.selected" theme="bootstrap" ng-disabled="disabled" style="width: 50%; float: left;">
         <ui-select-match placeholder="Select starting year">{{$select.selected.label}}</ui-select-match>
         <ui-select-choices repeat="year in yearPriceData | filter: lessThan(endingYear.selected) | filter: $select.search">
           <small ng-bind-html="year.label | highlight: $select.search"></small>
         </ui-select-choices>
       </ui-select>
-      <ui-select ng-show="showTable" ng-model="endingYear.selected" theme="bootstrap" ng-disabled="disabled" style="width: 50%;float:right">
+      <ui-select ng-show="showTable" ng-model="endingYear.selected" theme="bootstrap" ng-disabled="disabled" style="width: 50%; float: right;">
         <ui-select-match placeholder="Select ending year">{{$select.selected.label}}</ui-select-match>
         <ui-select-choices repeat="year in yearPriceData | filter: greaterThan(startingYear.selected) | filter: $select.search" >
           <small ng-bind-html="year.label | highlight: $select.search"></small>
@@ -68,7 +68,7 @@
         </th>
         <th></th>
       </tr>
-      <tr ng-repeat="x in singleCarData | orderBy:sortType:sortReverse track by $index">
+      <tr ng-repeat="x in filteredData | orderBy:sortType:sortReverse track by $index">
         <!--<td>{{x.make}}</td>-->
         <!--<td>{{x.model}}</td>-->
         <td>{{x.year}}</td>

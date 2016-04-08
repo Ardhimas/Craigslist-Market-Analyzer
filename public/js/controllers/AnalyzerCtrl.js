@@ -16,8 +16,7 @@ angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', functi
     $scope.getCarData = function(make,model){
         Car.getByMakeModel(make,model).success(function(data){
             $scope.singleCarData = data;
-            // $scope.yearCountData = Analyzer.yearCount($scope.singleCarData);
-            // $scope.yearPriceData = Analyzer.yearPrice($scope.singleCarData);
+            $scope.filteredData = data;
     
             updateGraphs();// $scope.tagline = Analyzer.yearPrice(data);
         });
@@ -25,7 +24,7 @@ angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', functi
     $scope.lessThan = function(val){
         return function(data){
             if(val){
-                console.log(data.label + ' ' + val);
+                // console.log(data.label + ' ' + val);
                 return (parseInt(data.label) <= parseInt(val.label));
             }
             else
@@ -35,7 +34,7 @@ angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', functi
     $scope.greaterThan = function(val){
         return function(data){
             if (val){
-                console.log(data.label + ' ' + val);
+                // console.log(data.label + ' ' + val);
                 return (parseInt(data.label) >= parseInt(val.label));
             }
             else
@@ -43,18 +42,20 @@ angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', functi
         };
     };
     $scope.filterGraph = function(startYear, endYear){
-        var filteredData = [];
+        var tempData = [];
         for (var listing in $scope.singleCarData) {
             if($scope.singleCarData.hasOwnProperty(listing)){
-                console.log("log" + $scope.singleCarData[listing].year);
+                // console.log("log" + $scope.singleCarData[listing].year);
                 if(parseInt($scope.singleCarData[listing].year) >= startYear && parseInt($scope.singleCarData[listing].year) <= endYear){
-                    filteredData.push($scope.singleCarData[listing]);
+                    tempData.push($scope.singleCarData[listing]);
                 }
             }
         }
-        console.log("Filtered data:" + filteredData);
-        $scope.yearCountData = Analyzer.yearCount(filteredData);
-        $scope.yearPriceData = Analyzer.yearPrice(filteredData);
+        // console.log("Filtered data:" + filteredData);
+        $scope.filteredData = tempData;
+        $scope.yearCountData = Analyzer.yearCount($scope.filteredData);
+        $scope.yearPriceData = Analyzer.yearPrice($scope.filteredData);
+        $scope.$apply();
     };
     $scope.barChartOptions = {
         chart: {
@@ -113,12 +114,4 @@ angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', functi
     $scope.startingYear = {};
     $scope.endingYear = {};
     // $scope.tagline = $scope.startingYear.selected + ' ' + $scope.endingYear.selected;
-    // $scope.carList = $rootScope.carList;
-    // $scope.carList = [
-    //     {make: 'Honda', model: 'Civic'},
-    //     {make: 'Honda', model: 'Accord'},
-    //     {make: 'Toyota', model: 'Corolla'},
-    //     {make: 'Toyota', model: 'Camry'}
-    // ];
-
 });

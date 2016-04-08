@@ -10,7 +10,7 @@ angular.module('CarCtrl', []).controller('CarController', function($scope, Car) 
         $scope.carData = data;
     });
     $scope.sortType = 'date';
-    $scope.sortReverse = false;
+    $scope.sortReverse = true;
     $scope.car = {};
-
+    $scope.city = {};
 });
