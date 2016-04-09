@@ -79,7 +79,7 @@
 small {
   color: #c8c8c8;
 }
-.btn-danger {
+.btn-resize {
   padding: 2px 4px;
 }
 @media (max-width: 767px) {
@@ -96,7 +96,7 @@ small {
     color: #f9f8fb;
     background-color: #962bc0;
   }
-  .btn-danger { 
+  .btn-resize { 
     font-size: 80%; 
     line-height: 1; 
     border-radius: 3px; 

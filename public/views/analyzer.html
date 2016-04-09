@@ -4,13 +4,21 @@
     <h1>Analyzer</h1>
 
     <p>{{ tagline }}</p>
-    <ui-select ng-model="car.selected" theme="bootstrap" ng-disabled="disabled" style="width: device-width;">
-      <ui-select-match placeholder="Select or search for a car in the list...">{{$select.selected.make + ' ' + $select.selected.model}}</ui-select-match>
-      <ui-select-choices repeat="car in carList | filter: $select.search">
-        <small ng-bind-html="car.make | highlight: $select.search"></small>
-        <small ng-bind-html="car.model | highlight: $select.search"></small>
-      </ui-select-choices>
-    </ui-select>
+    <div id="buttonContainer" style="width: device-width; position: relative;">
+      <ui-select ng-model="city.selected" theme="bootstrap" ng-disabled="disabled" style="width: 50%; float: left;">
+        <ui-select-match placeholder="Select or search for a city in the list...">{{$select.selected.name}}</ui-select-match>
+        <ui-select-choices repeat="city in cityList | filter: $select.search">
+          <small ng-bind-html="city.name | highlight: $select.search"></small>
+        </ui-select-choices>
+      </ui-select>
+      <ui-select ng-model="car.selected" theme="bootstrap" ng-disabled="disabled" style="width: 50%; float: right;">
+        <ui-select-match placeholder="Select or search for a car in the list...">{{$select.selected.make + ' ' + $select.selected.model}}</ui-select-match>
+        <ui-select-choices repeat="car in carList | filter: $select.search">
+          <small ng-bind-html="car.make | highlight: $select.search"></small>
+          <small ng-bind-html="car.model | highlight: $select.search"></small>
+        </ui-select-choices>
+      </ui-select>
+    </div>
     <br>
     <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="getCarData(car.selected.make,car.selected.model); showTable=true">Analyze!</button>
     <br>
@@ -76,7 +84,7 @@
         <td><a ng-href="https://austin.craigslist.org/cto/{{x.carID}}.html">{{x.carID}}</a></td>
         <td>{{x.date}}</td>
         <td>
-          <button type="button" class="btn btn-danger" ng-click="removeCar(x)">
+          <button type="button" class="btn btn-danger btn-resize" ng-click="removeCar(x)">
             Delete
           </button>
         </td>

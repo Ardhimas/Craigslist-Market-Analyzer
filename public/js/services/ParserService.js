@@ -13,9 +13,9 @@ angular.module('ParserService', []).factory('Parser', [ function() {
     
     return {
         // call to grab a page given make and model
-        get : function(make, model, callback) {
+        get : function(link, make, model, callback) {
             // angular.element refers to jQuery
-            angular.element.get('http://austin.craigslist.org/search/cto?auto_make_model=' + make + '+' + model, function(data) {
+            angular.element.get('http://' + link + '.craigslist.org/search/cto?auto_make_model=' + make + '+' + model, function(data) {
                 var listings = [];
                 var totalCount = parseInt(angular.element(data).find('span.button.pagenum > span.totalcount').first().text());
                 var promises = [];
