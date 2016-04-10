@@ -12,7 +12,7 @@
         </ui-select-choices>
       </ui-select>
       <ui-select ng-model="car.selected" theme="bootstrap" ng-disabled="disabled" style="width: 50%; float: right;">
-        <ui-select-match placeholder="Filter by Make and Model">{{$select.selected.make + ' ' + $select.selected.model}}</ui-select-match>
+        <ui-select-match placeholder="Filter by Make/Model">{{$select.selected.make + ' ' + $select.selected.model}}</ui-select-match>
         <ui-select-choices repeat="car in carList | filter: $select.search">
           <small ng-bind-html="car.make | highlight: $select.search"></small>
           <small ng-bind-html="car.model | highlight: $select.search"></small>
@@ -69,7 +69,7 @@
         <td>{{x.model}}</td>
         <td>{{x.year}}</td>
         <td>{{'$'+x.price}}</td>
-        <td><a ng-href="https://austin.craigslist.org/cto/{{x.carID}}.html">{{x.carID}}</a></td>
+        <td><a ng-href="https://{{city.selected.link}}.craigslist.org/cto/{{x.carID}}.html">{{x.carID}}</a></td>
         <td>{{x.date}}</td>
         <td>{{x.city}}</td>
         <td>
