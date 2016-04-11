@@ -64,14 +64,14 @@
         <th></th>
       </tr>
       <tr ng-repeat="x in carData | orderBy:sortType:sortReverse | filter:
-      {model:car.selected.model, city:city.selected.name} track by $index">
+      {model:car.selected.model, city_name:city.selected.name} track by $index">
         <td>{{x.make}}</td>
         <td>{{x.model}}</td>
         <td>{{x.year}}</td>
         <td>{{'$'+x.price}}</td>
-        <td><a ng-href="https://{{city.selected.link}}.craigslist.org/cto/{{x.carID}}.html">{{x.carID}}</a></td>
+        <td><a ng-href="https://{{x.city_link}}.craigslist.org/cto/{{x.carID}}.html">{{x.carID}}</a></td>
         <td>{{x.date}}</td>
-        <td>{{x.city}}</td>
+        <td>{{x.city_name}}</td>
         <td>
           <button type="button" class="btn btn-danger btn-resize" ng-click="removeCar(x)">
             Delete

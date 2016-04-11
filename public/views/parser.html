@@ -21,10 +21,10 @@
     </ui-select>
   </div>
   <br>
-  <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="parseCar(city.selected.link, car.selected.make,car.selected.model); showTable=true">Parse!</button>
+  <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="parseCar(city.selected, car.selected.make,car.selected.model); showTable=true">Parse!</button>
   <br>
-  <table class="table table-bordered table-striped" style="width:100%">
-    <tr ng-show="showTable">
+  <table ng-show="showTable" class="table table-bordered table-striped" style="width:100%">
+    <tr>
       <th>List Title</th>
       <th>
         <a href="#" ng-click="sortType = 'year'; sortReverse = !sortReverse">
@@ -52,7 +52,7 @@
       <!--<td>{{x.model}}</td>-->
       <td>{{x.year}}</td>
       <td>{{'$' + x.price}}</td>
-      <td><a ng-href="https://{{city.selected.link}}.craigslist.org/cto/{{x.carID}}.html">{{x.carID}}</a></td>
+      <td><a ng-href="https://{{x.city_link}}.craigslist.org/cto/{{x.carID}}.html">{{x.carID}}</a></td>
       <td>{{x.date}}</td>
       <td><button type="button" class="btn btn-secondary btn-resize" ng-click="post(x)">Save</button></td>
       <!--{{ x.make + ' ' + x.model + ' ' x.year }}-->

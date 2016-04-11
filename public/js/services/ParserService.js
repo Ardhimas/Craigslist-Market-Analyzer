@@ -13,16 +13,16 @@ angular.module('ParserService', []).factory('Parser', [ function() {
     
     return {
         // call to grab a page given make and model
-        get : function(link, make, model, callback) {
+        get : function(city, make, model, callback) {
             // angular.element refers to jQuery
-            angular.element.get('http://' + link + '.craigslist.org/search/cto?auto_make_model=' + make + '+' + model, function(data) {
+            angular.element.get('http://' + city.link + '.craigslist.org/search/cto?auto_make_model=' + make + '+' + model, function(data) {
                 var listings = [];
                 var totalCount = parseInt(angular.element(data).find('span.button.pagenum > span.totalcount').first().text());
                 var promises = [];
                 var extraPages = (totalCount > 100) ? Math.floor((totalCount - 1)/100) : 0;
                 for(extraPages; extraPages>=0; extraPages--) {
                     // alert(extraPages);
-                    promises.push(angular.element.get('http://austin.craigslist.org/search/cto?s= ' + extraPages*100 + '&auto_make_model=' + make + '%20' + model, function(data) {
+                    promises.push(angular.element.get('http://' + city.link + '.craigslist.org/search/cto?s= ' + extraPages*100 + '&auto_make_model=' + make + '%20' + model, function(data) {
                         angular.element(data).find('span.txt').each(function(){
                             var tempTitle = angular.element(this).find('#titletextonly').text();
                             var tempPrice = parseInt(angular.element(this).find('span.price').text().slice(1));
@@ -44,7 +44,8 @@ angular.module('ParserService', []).factory('Parser', [ function() {
                                 }
                             }
                             if (tempPrice >= 1000 && tempYear > 0 && tempId > 1){
-                                listings.push({title: tempTitle, make: make, model: model, price: tempPrice, year: tempYear, carID: tempId, date: tempDate});
+                                listings.push({title: tempTitle, make: make, model: model, price: tempPrice, 
+                                    year: tempYear, carID: tempId, date: tempDate, city_name: city.name, city_link: city.link});
                                 // alert("pushed" +tempTitle);
                             }
                         });

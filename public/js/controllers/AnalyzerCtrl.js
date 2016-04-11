@@ -13,7 +13,9 @@ angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', functi
         updateGraphs();
         // $scope.yearCountData = Analyzer.yearCount($scope.singleCarData);
     };
-    $scope.getCarData = function(make,model){
+    
+    // TODO: add city filter
+    $scope.getCarData = function(city,make,model){
         Car.getByMakeModel(make,model).success(function(data){
             $scope.singleCarData = data;
             $scope.filteredData = data;

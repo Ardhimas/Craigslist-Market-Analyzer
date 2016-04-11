@@ -75,32 +75,36 @@ var express = require('express');
         
             // update the car with this id (accessed at PUT http://localhost:8080/api/cars/:car_id)
             .put(function(req, res) {
-        
                 // use our car model to find the car we want
-                // Car.findById(req.params.car_id, function(err, car) {
-                // TODO: modify to have more comparisons to ensure no duplicates exist
-                Car.findOne({ carID: req.params.car_id},function(err, car) {
+                Car.findOneAndUpdate({carID:req.body.carID}, req.body, {upsert:false}, function(err,car){
                     if (err)
                         res.send(err);
-        
-                    //Update car info
-                    car.make = req.body.make;  // set the cars name (comes from the request)
-                    car.model = req.body.model;
-                    car.year = req.body.year;
-                    car.price = req.body.price;
-                    car.carID = req.body.carID;
-                    car.date = req.body.date;
-                    car.city = req.body.city;
-        
-                    // save the car
-                    car.save(function(err) {
-                        if (err)
-                            res.send(err);
-        
-                        res.json({ message: 'Car updated!' });
-                    });
-        
+                    res.json({message: 'Car saved'});
                 });
+                // Car.findById(req.params.car_id, function(err, car) {
+                // TODO: modify to have more comparisons to ensure no duplicates exist
+                // Car.findOne({ carID: req.params.car_id},function(err, car) {
+                //     if (err)
+                //         res.send(err);
+        
+                //     //Update car info
+                //     car.make = req.body.make;  // set the cars name (comes from the request)
+                //     car.model = req.body.model;
+                //     car.year = req.body.year;
+                //     car.price = req.body.price;
+                //     car.carID = req.body.carID;
+                //     car.date = req.body.date;
+                //     car.city = req.body.city;
+        
+                //     // save the car
+                //     car.save(function(err) {
+                //         if (err)
+                //             res.send(err);
+        
+                //         res.json({ message: 'Car updated!' });
+                //     });
+        
+                // });
             })
             
             // delete the car with this id (accessed at DELETE http://localhost:8080/api/cars/:car_id)

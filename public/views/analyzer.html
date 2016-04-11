@@ -12,7 +12,7 @@
         </ui-select-choices>
       </ui-select>
       <ui-select ng-model="car.selected" theme="bootstrap" ng-disabled="disabled" style="width: 50%; float: right;">
-        <ui-select-match placeholder="Select/Search for City">{{$select.selected.make + ' ' + $select.selected.model}}</ui-select-match>
+        <ui-select-match placeholder="Select/Search for Car">{{$select.selected.make + ' ' + $select.selected.model}}</ui-select-match>
         <ui-select-choices repeat="car in carList | filter: $select.search">
           <small ng-bind-html="car.make | highlight: $select.search"></small>
           <small ng-bind-html="car.model | highlight: $select.search"></small>
@@ -20,7 +20,7 @@
       </ui-select>
     </div>
     <br>
-    <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="getCarData(car.selected.make,car.selected.model); showTable=true">Analyze!</button>
+    <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="getCarData(city.selected,car.selected.make,car.selected.model); showTable=true">Analyze!</button>
     <br>
     <div id="buttonContainer" style="width: device-width; position: relative;">
       <ui-select ng-show="showTable" ng-model="startingYear.selected" theme="bootstrap" ng-disabled="disabled" style="width: 50%; float: left;">
@@ -67,11 +67,17 @@
           <span ng-show="sortType == 'price'" class="fa fa-caret-down"></span>
           </a>
         </th>
-        <th>Link</th>
+        <th>ID</th>
         <th>
           <a href="#" ng-click="sortType = 'date'; sortReverse = !sortReverse">
           Date Posted
           <span ng-show="sortType == 'date'" class="fa fa-caret-down"></span>
+          </a>
+        </th>
+        <th>
+          <a href="#" ng-click="sortType = 'city'; sortReverse = !sortReverse">
+          City
+          <span ng-show="sortType == 'city'" class="fa fa-caret-down"></span>
           </a>
         </th>
         <th></th>
@@ -81,8 +87,9 @@
         <!--<td>{{x.model}}</td>-->
         <td>{{x.year}}</td>
         <td>{{'$'+x.price}}</td>
-        <td><a ng-href="https://{{city.selected.link}}.craigslist.org/cto/{{x.carID}}.html">{{x.carID}}</a></td>
+        <td><a ng-href="https://{{x.city_link}}.craigslist.org/cto/{{x.carID}}.html">{{x.carID}}</a></td>
         <td>{{x.date}}</td>
+        <td>{{x.city_name}}</td>
         <td>
           <button type="button" class="btn btn-danger btn-resize" ng-click="removeCar(x)">
             Delete

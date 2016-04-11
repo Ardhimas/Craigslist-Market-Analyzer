@@ -11,8 +11,8 @@ angular.module('ParserCtrl', []).controller('ParserController', function($scope,
             // $scope.tagline = listings;
         });
     }
-    $scope.parseCar = function(link,make,model){
-        Parser.get(link,make,model,showList);
+    $scope.parseCar = function(city,make,model){
+        Parser.get(city,make,model,showList);
     };
     $scope.post = function(carobj){
         Car.create(carobj);
