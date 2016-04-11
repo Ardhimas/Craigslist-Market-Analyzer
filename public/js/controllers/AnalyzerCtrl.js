@@ -16,9 +16,10 @@ angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', functi
     
     // TODO: add city filter
     $scope.getCarData = function(city,make,model){
-        Car.getByMakeModel(make,model).success(function(data){
+        Car.getByCityMakeModel(city.name,make,model).success(function(data){
             $scope.singleCarData = data;
             $scope.filteredData = data;
+            $scope.yearList = Analyzer.yearList(data);
     
             updateGraphs();// $scope.tagline = Analyzer.yearPrice(data);
         });
@@ -27,7 +28,8 @@ angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', functi
         return function(data){
             if(val){
                 // console.log(data.label + ' ' + val);
-                return (parseInt(data.label) <= parseInt(val.label));
+                // return data <= val;
+                return (parseInt(data) <= parseInt(val));
             }
             else
                 return true;
@@ -37,7 +39,8 @@ angular.module('AnalyzerCtrl', ['nvd3']).controller('AnalyzerController', functi
         return function(data){
             if (val){
                 // console.log(data.label + ' ' + val);
-                return (parseInt(data.label) >= parseInt(val.label));
+                // return data >= val;
+                return (parseInt(data) >= parseInt(val));
             }
             else
                 return true;

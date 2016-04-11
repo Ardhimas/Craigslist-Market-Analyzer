@@ -12,7 +12,7 @@
         </ui-select-choices>
       </ui-select>
       <ui-select ng-model="car.selected" theme="bootstrap" ng-disabled="disabled" style="width: 50%; float: right;">
-        <ui-select-match placeholder="Select/Search for Car">{{$select.selected.make + ' ' + $select.selected.model}}</ui-select-match>
+        <ui-select-match placeholder="Select/Search for Car by Make/Model">{{$select.selected.make + ' ' + $select.selected.model}}</ui-select-match>
         <ui-select-choices repeat="car in carList | filter: $select.search">
           <small ng-bind-html="car.make | highlight: $select.search"></small>
           <small ng-bind-html="car.model | highlight: $select.search"></small>
@@ -24,20 +24,20 @@
     <br>
     <div id="buttonContainer" style="width: device-width; position: relative;">
       <ui-select ng-show="showTable" ng-model="startingYear.selected" theme="bootstrap" ng-disabled="disabled" style="width: 50%; float: left;">
-        <ui-select-match placeholder="Select starting year">{{$select.selected.label}}</ui-select-match>
-        <ui-select-choices repeat="year in yearPriceData | filter: lessThan(endingYear.selected) | filter: $select.search">
-          <small ng-bind-html="year.label | highlight: $select.search"></small>
+        <ui-select-match placeholder="Select starting year">{{$select.selected}}</ui-select-match>
+        <ui-select-choices repeat="year in yearList | filter: lessThan(endingYear.selected) | filter: $select.search">
+          <small ng-bind-html="year | highlight: $select.search"></small>
         </ui-select-choices>
       </ui-select>
       <ui-select ng-show="showTable" ng-model="endingYear.selected" theme="bootstrap" ng-disabled="disabled" style="width: 50%; float: right;">
-        <ui-select-match placeholder="Select ending year">{{$select.selected.label}}</ui-select-match>
-        <ui-select-choices repeat="year in yearPriceData | filter: greaterThan(startingYear.selected) | filter: $select.search" >
-          <small ng-bind-html="year.label | highlight: $select.search"></small>
+        <ui-select-match placeholder="Select ending year">{{$select.selected}}</ui-select-match>
+        <ui-select-choices repeat="year in yearList | filter: greaterThan(startingYear.selected) | filter: $select.search" >
+          <small ng-bind-html="year | highlight: $select.search"></small>
         </ui-select-choices>
       </ui-select>
     </div>
     <br>
-    <button ng-show="showTable" type="button" class="btn btn-primary btn-lg btn-block" ng-click="filterGraph(startingYear.selected.label, endingYear.selected.label)">Filter</button>
+    <button ng-show="showTable" type="button" class="btn btn-primary btn-lg btn-block" ng-click="filterGraph(startingYear.selected, endingYear.selected)">Filter</button>
     <br>
     <nvd3 ng-show="showTable" options="barChartOptions" data="yearCountData" class="graphs"></nvd3>
     <nvd3 ng-show="showTable" options="boxPlotOptions" data="yearPriceData"  class="graphs"></nvd3>

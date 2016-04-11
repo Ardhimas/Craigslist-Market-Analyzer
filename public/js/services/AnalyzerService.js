@@ -67,7 +67,22 @@ angular.module('AnalyzerService', []).factory('Analyzer', [function() {
     }
     
     return {
-        // call to get all cars
+        yearList : function(data) {
+            var tempList = {};
+            var yearList = [];
+            for (var car in data){
+                if (!tempList.hasOwnProperty(data[car].year)) {
+                    tempList[data[car].year] = {};
+                    yearList.push(data[car].year);
+                }
+            }
+            // console.log('tempList = ' + tempList)
+            console.log('yearList = ' + yearList);
+            yearList.sort(function(a, b){return a-b});
+            return yearList;
+        },
+
+        // Get quantity of listings by year
         yearCount : function(data) {
             var countList = {};
             for (var car in data){
@@ -88,6 +103,7 @@ angular.module('AnalyzerService', []).factory('Analyzer', [function() {
             return yearData;
         },
         
+        // Get list of prices by year
         yearPrice : function(data) {
             var priceList = {};
             for (var car in data){

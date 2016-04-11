@@ -141,7 +141,16 @@ var express = require('express');
                 });
             });
 
-        
+        router.route('/cars/:city/:make/:model')
+            // get the car with that id (accessed at GET http://localhost:8080/api/cars/:car_id)
+            .get(function(req, res) {
+                // Car.findById(req.params.car_id, function(err, car) {
+                Car.find({ make: req.params.make, model: req.params.model, city_name: req.params.city},function(err, car) {
+                    if (err)
+                        res.send(err);
+                    res.json(car);
+                });
+            })
         // REGISTER OUR ROUTES -------------------------------
         // all of our routes will be prefixed with /api
         app.use('/api', router);
