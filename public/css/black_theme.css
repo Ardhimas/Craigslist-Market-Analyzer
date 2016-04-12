@@ -10,9 +10,11 @@ html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  height:100%;
 }
 body {
   margin: 0;
+  height:100%;
 }
 article,
 aside,
@@ -1076,7 +1078,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
-  color: #c8c8c8;
+  color: #ffffff;
   background-color: #272b30;
 }
 input,
@@ -7099,7 +7101,7 @@ a.thumbnail.active {
   border-color: #0c0d0e;
 }
 .jumbotron {
-  border: 1px solid rgba(0, 0, 0, 0.6);
+  border: 0px solid rgba(0, 0, 0, 0.6);
 }
 .panel-primary .panel-heading,
 .panel-success .panel-heading,

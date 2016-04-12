@@ -82,6 +82,25 @@ small {
 .btn-resize {
   padding: 2px 4px;
 }
+header {
+    background-image: url(../img/analyzer_screen.png);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+}
+header > .jumbotron {
+    background-color: transparent;
+    /*padding-top: 100px;*/
+    /*padding-bottom: 100px;*/
+    padding: 150px 30px;
+    min-height: 100%;
+  
+}
+.container-fluid {
+  padding: 0px 0px;
+}
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
     color: #f0dcfd;
