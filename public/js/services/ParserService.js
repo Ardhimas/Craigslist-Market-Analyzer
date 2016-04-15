@@ -6,8 +6,8 @@ angular.module('ParserService', []).factory('Parser', [ function() {
       if (options.crossDomain && jQuery.support.cors) {
         var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
         // options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
-        options.url = http + '//cors-anywhere-ardhimas.c9users.io/' + options.url;
-        // options.url = http +'//cors.corsproxy.io/url=' + options.url;
+        // options.url = http + '//cors-anywhere-ardhimas.c9users.io/' + options.url;
+        options.url = http +'//ardy-cors.herokuapp.com/' + options.url;
       }
     });
     
