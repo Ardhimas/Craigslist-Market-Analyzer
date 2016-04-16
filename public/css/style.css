@@ -101,6 +101,13 @@ header > .jumbotron {
 .container-fluid {
   padding: 0px 0px;
 }
+.app-title {
+  padding: 100px 15px;
+}
+section {
+  padding-top: 20px;
+  padding-bottom: 100px;
+}
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
     color: #f0dcfd;
