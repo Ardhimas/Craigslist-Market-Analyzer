@@ -1,7 +1,7 @@
 // public/js/controllers/CarCtrl.js
 angular.module('CarCtrl', []).controller('CarController', function($scope, Car) {
 
-    $scope.tagline = 'Data retrieved from locally hosted MongoDB database';
+    $scope.tagline = 'Data retrieved from MongoDB database hosted on mLab';
     $scope.removeCar = function(car) {
         $scope.carData.splice($scope.carData.indexOf(car), 1);
         Car.delete(car.carID);

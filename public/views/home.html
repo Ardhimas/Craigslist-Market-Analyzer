@@ -5,7 +5,8 @@
     
         <p>{{ tagline }}</p>
         
-        <a href="#about" class="btn btn-default btn-lg page-scroll">About</a>
+        <button ng-click="scroll('#about')" class="btn btn-default btn-lg page-scroll">About</a></a>
+        <!--<a href="#about" class="btn btn-default btn-lg page-scroll">About</a>-->
         <!--<div class="container-fluid">-->
         <!--</div>-->
     </div>
@@ -16,30 +17,46 @@
             <div class="page-header">
               <h2>About</h2>
             </div>
-            <h3>Craigslist Market Analyzer is a web application that has three main functionalities:</h1>
+            <div class="page-content">
+                <p>Craigslist Market Analyzer is a MEAN stack web application that I started in March 2016. The goal of the application is to collect data on cars on Craigslist
+                to be able to determine in the future what the true market price of a privately sold vehicle is. While there are various websites like Kelly Blue Book and TrueCar which appraise 
+                cars, this app collects real data on Craigslist private listings for any city(currently limited to cities in Texas) on cars sold exclusively by individuals. The main goal of 
+                this app is in determining when a good deal pops up on Craigslist.
+                </p>
+                <p>At its current state, the application is made up of three key components:</p>
+            </div>
             
             <div class="row">
                 <div class="col-lg-3 col-sm-4 text-center">
                     <div class="service-box">
-                        <i class="fa fa-4x fa-database"></i>
-                        <h3>Database</h3>
-                        <p class="text-muted">The database stores information on the year, make, model, city, and URL of every car that has been saved.</p>
+                        <a href="/database">
+                            <i class="fa fa-4x fa-database"></i>
+                            <h3>Database</h3>
+                            <p class="text-muted">The database stores information on the year, make, model, city, and URL of every car that has been saved.</p>
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-4 text-center">
                     <div class="service-box">
-                        <i class="fa fa-4x fa-search-plus"></i>
-                        <h3>Parser</h3>
-                        <p class="text-muted">The parser performs a Craigslist search for a given city, make, model and parses the results to neatly display the data in a table.</p>
+                        <a href="/parser">
+                            <i class="fa fa-4x fa-search-plus"></i>
+                            <h3>Parser</h3>
+                            <p class="text-muted">The parser performs a Craigslist search for a given city, make, model and parses the results to neatly display the data in a table.</p>
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-4 text-center">
                     <div class="service-box">
-                        <i class="fa fa-4x fa-bar-chart"></i>
-                        <h3>Analyzer</h3>
-                        <p class="text-muted">The analyzer processes data from the database for a given city, make, model and displays the information in a series of graphs. </p>
+                        <a href="/analyzer">
+                            <i class="fa fa-4x fa-bar-chart"></i>
+                            <h3>Analyzer</h3>
+                            <p class="text-muted">The analyzer processes data from the database for a given city, make, model and displays the information in a series of graphs. </p>
+                        </a>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                
             </div>
         </div>
     </section>

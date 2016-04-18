@@ -10,8 +10,8 @@
         })
 
         // cars page that will use the CarController
-        .when('/cars', {
-            templateUrl: 'views/car.html',
+        .when('/database', {
+            templateUrl: 'views/database.html',
             controller: 'CarController'
         })
         

@@ -108,6 +108,14 @@ section {
   padding-top: 20px;
   padding-bottom: 100px;
 }
+a {
+    /*color: #f05f40;*/
+    /*color: #860111;*/
+    color: #ffffff;
+    -webkit-transition: all .35s;
+    -moz-transition: all .35s;
+    transition: all .35s;
+}
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
     color: #f0dcfd;
