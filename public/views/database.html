@@ -64,7 +64,7 @@
         <th></th>
       </tr>
       <tr ng-repeat="x in carData | orderBy:sortType:sortReverse | filter:
-      {model:car.selected.model, city_name:city.selected.name} track by $index">
+      {model:car.selected.model, city_name:city.selected.name} | filter:paginate track by $index">
         <td>{{x.make}}</td>
         <td>{{x.model}}</td>
         <td>{{x.year}}</td>
@@ -79,5 +79,9 @@
         </td>
       </tr>
   </table>
+  <pagination total-items="totalItems" ng-model="currentPage"
+          max-size="5" boundary-links="true"
+          items-per-page="numPerPage" class="pagination-sm">
+        </pagination>
 
 </div>
