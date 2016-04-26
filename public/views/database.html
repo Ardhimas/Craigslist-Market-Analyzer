@@ -4,6 +4,7 @@
     <h1>Database</h1>
 
     <p>{{ tagline }}</p>
+    <p>{{'Displaying ' + numPerPage + ' of ' + carData.length + ' results.'}}</p>
     <div id="buttonContainer" style="width: device-width; position: relative;">
       <ui-select ng-model="city.selected" theme="bootstrap" ng-disabled="disabled" style="width: 50%; float: left;">
         <ui-select-match placeholder="Filter by City">{{$select.selected.name}}</ui-select-match>
@@ -79,9 +80,23 @@
         </td>
       </tr>
   </table>
-  <pagination total-items="totalItems" ng-model="currentPage"
-          max-size="5" boundary-links="true"
-          items-per-page="numPerPage" class="pagination-sm">
-        </pagination>
+  <ul class="pagination">
+    <li>
+      <a href ng-click="currentPage = currentPage-1" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li ng-repeat="page in pageList track by $index" ng-class="{'active':$index==selectedIndex}"><a href 
+    ng-click="setPage($index);" >{{$index+1}}</a></li>
+    <!--<li><a href ng-click="currentPage = 2">2</a></li>-->
+    <!--<li><a href ng-click="currentPage = 3">3</a></li>-->
+    <!--<li><a href ng-click="currentPage = 1">1</a></li>-->
+    <!--<li><a href ng-click="currentPage = 1">1</a></li>-->
+    <li>
+      <a href ng-click="setPage($index+1)" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
 
 </div>
